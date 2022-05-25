@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import springboot.realstate_api.dto.requestDto.PhotoRequestDto;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -70,7 +71,7 @@ public class Property {
     )
     private Set<Photo> photos = new HashSet<>();
 
-    public Set<Photo> getPhotos() {
+    public Set<PhotoRequestDto> getPhotos() {
         return photos;
     }
     public void setPhotos(Set<Photo> photos) {

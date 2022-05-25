@@ -1,11 +1,10 @@
 package springboot.realstate_api.dto.responseDto;
 
 import lombok.Data;
-import springboot.realstate_api.dto.requestDto.FeatureRequestDto;
 import springboot.realstate_api.dto.requestDto.LocationRequestDto;
 import springboot.realstate_api.dto.requestDto.PhotoRequestDto;
 import springboot.realstate_api.dto.requestDto.TypeRequestDto;
-import springboot.realstate_api.model.Photo;
+import springboot.realstate_api.model.Feature;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -26,6 +25,6 @@ public class PropertyResponseDto {
     private TypeRequestDto type;
     private LocationRequestDto location;
     private UserResponseDto user;
-    private Set<FeatureRequestDto> features;
+    private Set<Feature> features;
     private Set<PhotoRequestDto> photos;
 }

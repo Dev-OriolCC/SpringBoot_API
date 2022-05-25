@@ -1,11 +1,13 @@
 package springboot.realstate_api.dto.requestDto;
 
 import lombok.Data;
+import springboot.realstate_api.model.Property;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Data
 public class PhotoRequestDto {
@@ -18,4 +20,7 @@ public class PhotoRequestDto {
     @NotNull
     @Size(min = 4, message = "ALT must at least be greater than 4 characters")
     private String alt;
+
+    @NotNull
+    private Set<Property> properties;
 }

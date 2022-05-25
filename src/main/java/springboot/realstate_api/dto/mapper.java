@@ -4,8 +4,13 @@ import springboot.realstate_api.dto.requestDto.*;
 import springboot.realstate_api.dto.responseDto.PropertyResponseDto;
 import springboot.realstate_api.dto.responseDto.UserResponseDto;
 import springboot.realstate_api.model.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Issue with mapper
+ * All parameters on dtos should return List<Model> NOT Set<Model>
+ */
 
 public class mapper {
     // 1.- --- --- --- --- --- --- --- --- --- ---
@@ -25,12 +30,12 @@ public class mapper {
         propertyResponseDto.setType(typeToTypeRequestDto(property.getType()));
         propertyResponseDto.setLocation(locationToLocationRequestDto(property.getLocation()));
         propertyResponseDto.setUser(userToUserResponseDto(property.getUser())); // [TEST]
-        propertyResponseDto.setFeatures(featureToFeatureRequestDtos(property.getFeatures()));
-        propertyResponseDto.setPhotos(photoToPhotoRequestDtos(property.getPhotos()));
+        propertyResponseDto.setFeatures(property.getFeatures()); // Changed propertyResponseDto_Feature
+        propertyResponseDto.setPhotos(property.getPhotos()); // Changed photosResponseDto_Photo
         return propertyResponseDto;
     }
-    public static Set<PropertyResponseDto> propertyToPropertyResponseDtos(Set<Property> properties) {
-        Set<PropertyResponseDto> propertyResponseDtos = new HashSet<>();
+    public static List<PropertyResponseDto> propertyToPropertyResponseDtos(List<Property> properties) {
+        List<PropertyResponseDto> propertyResponseDtos = new ArrayList<>();
         for (Property property: properties) {
             propertyResponseDtos.add(propertyToPropertyResponseDto(property));
         }
@@ -49,11 +54,11 @@ public class mapper {
         // Relationship Data
         userResponseDto.setRole(roleToRoleRequestDto(user.getRole()));
         userResponseDto.setLocation(locationToLocationRequestDto(user.getLocation()));
-        userResponseDto.setProperties(propertyToPropertyResponseDtos(user.getProperties())); // [TEST]
+        userResponseDto.setProperties(user.getProperties()); // [TEST] Changed Dto to Model
         return userResponseDto;
     }
-    public static Set<UserResponseDto> userToUserResponseDtos(Set<User> users) {
-        Set<UserResponseDto> userResponseDtos = new HashSet<>();
+    public static List<UserResponseDto> userToUserResponseDtos(List<User> users) {
+        List<UserResponseDto> userResponseDtos = new ArrayList<>();
         for (User user:  users) {
             userResponseDtos.add(userToUserResponseDto(user));
         }
@@ -87,8 +92,8 @@ public class mapper {
         featureRequestDto.setName(feature.getName());
         return featureRequestDto;
     }
-    public static Set<FeatureRequestDto> featureToFeatureRequestDtos(Set<Feature> features) {
-        Set<FeatureRequestDto> featureRequestDtos = new HashSet<>();
+    public static List<FeatureRequestDto> featureToFeatureRequestDtos(List<Feature> features) {
+        List<FeatureRequestDto> featureRequestDtos = new ArrayList<>();
         for (Feature feature : features) {
             featureRequestDtos.add(featureToFeatureRequestDto(feature));
         }
@@ -101,8 +106,8 @@ public class mapper {
         photoRequestDto.setAlt(photo.getAlt());
         return photoRequestDto;
     }
-    public static Set<PhotoRequestDto> photoToPhotoRequestDtos(Set<Photo> photos) {
-        Set<PhotoRequestDto> photoRequestDtos = new HashSet<>();
+    public static List<PhotoRequestDto> photoToPhotoRequestDtos(List<Photo> photos) {
+        List<PhotoRequestDto> photoRequestDtos = new ArrayList<>();
         for (Photo photo : photos) {
             photoRequestDtos.add(photoToPhotoRequestDto(photo));
         }
