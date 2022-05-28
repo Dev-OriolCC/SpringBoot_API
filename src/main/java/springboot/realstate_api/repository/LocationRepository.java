@@ -6,7 +6,7 @@ import springboot.realstate_api.model.Location;
 import java.util.UUID;
 
 @Repository
-public interface LocationRepository extends JpaRepository<Location, UUID> {
+public interface LocationRepository extends JpaRepository<Location, String> {
 
 
 }

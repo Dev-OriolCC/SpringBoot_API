@@ -53,7 +53,7 @@ public class Property {
     @JoinTable(name = "property_feature",
         joinColumns = @JoinColumn(name = "property_id"),
         inverseJoinColumns = @JoinColumn(name = "feature_id")
-    )
+    ) // Previously didn't have & Feature only had id
     private Set<Feature> features = new HashSet<>();
 
     public Set<Feature> getFeatures() {
@@ -71,7 +71,7 @@ public class Property {
     )
     private Set<Photo> photos = new HashSet<>();
 
-    public Set<PhotoRequestDto> getPhotos() {
+    public Set<Photo> getPhotos() {
         return photos;
     }
     public void setPhotos(Set<Photo> photos) {

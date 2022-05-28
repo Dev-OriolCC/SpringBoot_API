@@ -30,7 +30,7 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public LocationRequestDto addLocation(LocationRequestDto locationRequestDto) {
         Location location = new Location();
-        location.setId(UUID.randomUUID());
+        location.setId(UUID.randomUUID().toString());
         location.setCountry(locationRequestDto.getCountry());
         location.setState(locationRequestDto.getState());
         location.setZipcode(locationRequestDto.getZipcode());
@@ -42,19 +42,19 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public LocationRequestDto getLocation(UUID locationId) {
+    public LocationRequestDto getLocation(String locationId) {
         return mapper.locationToLocationRequestDto(getLocationMethod(locationId));
     }
 
     @Override
-    public LocationRequestDto deleteLocation(UUID locationId) {
+    public LocationRequestDto deleteLocation(String locationId) {
         Location location = getLocationMethod(locationId);
         locationRepository.delete(location);
         return mapper.locationToLocationRequestDto(location);
     }
 
     // Service internal methods
-    public Location getLocationMethod(UUID locationId) {
+    public Location getLocationMethod(String locationId) {
         return locationRepository.findById(locationId).orElseThrow(() ->
                 new IllegalArgumentException("Location not found"+locationId));
     }

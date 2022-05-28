@@ -11,6 +11,6 @@ import java.util.UUID;
 public interface LocationService {
     public List<Location> getLocations();
     public LocationRequestDto addLocation(LocationRequestDto locationRequestDto);
-    public LocationRequestDto getLocation(UUID locationId);
-    public LocationRequestDto deleteLocation(UUID locationId);
+    public LocationRequestDto getLocation(String locationId);
+    public LocationRequestDto deleteLocation(String locationId);
 }

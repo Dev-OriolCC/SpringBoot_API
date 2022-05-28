@@ -118,7 +118,7 @@ public class User {
         this.location = location;
     }
 
-    public Set<PropertyResponseDto> getProperties() {
+    public Set<Property> getProperties() {
         return properties;
     }
 

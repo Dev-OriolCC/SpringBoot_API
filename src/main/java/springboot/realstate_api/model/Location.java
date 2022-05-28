@@ -9,8 +9,8 @@ import java.util.UUID;
 public class Location {
 
     @Id
-    @Column(name = "id", length = 16, unique = true, nullable = false)
-    private UUID id;
+    @Column(name = "id", length = 36, unique = true, nullable = false)
+    private String id;
 
     private String country;
     private String state;
@@ -24,11 +24,11 @@ public class Location {
 
     // Getters and Setters
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

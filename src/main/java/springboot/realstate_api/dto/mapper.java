@@ -31,7 +31,7 @@ public class mapper {
         propertyResponseDto.setLocation(locationToLocationRequestDto(property.getLocation()));
         propertyResponseDto.setUser(userToUserResponseDto(property.getUser())); // [TEST]
         propertyResponseDto.setFeatures(property.getFeatures()); // Changed propertyResponseDto_Feature
-        propertyResponseDto.setPhotos(property.getPhotos()); // Changed photosResponseDto_Photo
+        //propertyResponseDto.setPhotos(property.getPhotos()); // Changed photosResponseDto_Photo
         return propertyResponseDto;
     }
     public static List<PropertyResponseDto> propertyToPropertyResponseDtos(List<Property> properties) {
@@ -54,7 +54,7 @@ public class mapper {
         // Relationship Data
         userResponseDto.setRole(roleToRoleRequestDto(user.getRole()));
         userResponseDto.setLocation(locationToLocationRequestDto(user.getLocation()));
-        userResponseDto.setProperties(user.getProperties()); // [TEST] Changed Dto to Model
+        //userResponseDto.setProperties(user.getProperties()); // [TEST] Changed Dto to Model
         return userResponseDto;
     }
     public static List<UserResponseDto> userToUserResponseDtos(List<User> users) {
