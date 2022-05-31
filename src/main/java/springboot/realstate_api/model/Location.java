@@ -3,7 +3,10 @@ package springboot.realstate_api.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.UUID;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Location {
@@ -12,11 +15,27 @@ public class Location {
     @Column(name = "id", length = 36, unique = true, nullable = false)
     private String id;
 
+    @NotNull
+    @Size(min = 4, message = "Country must at least be greater than 4 characters")
     private String country;
+
+    @NotNull
+    @Size(min = 4, message = "State must at least be greater than 4 characters")
     private String state;
+
+    @NotNull
+    @Size(min = 4, message = "City must at least be greater than 4 characters")
     private String city;
+
+    @NotNull
+    @Min(1000)
+    @Max(10000000)
     private Integer zipcode;
+
+    @Size(min = 4, message = "Street must at least be greater than 4 characters")
     private String street;
+
+    @Size(min = 4, message = "Street must at least be greater than 4 characters")
     private String avenue;
 
     // Relationship

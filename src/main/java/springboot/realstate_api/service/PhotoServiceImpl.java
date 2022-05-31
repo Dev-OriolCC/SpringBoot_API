@@ -23,7 +23,7 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public List<PhotoRequestDto> getPropertyPhotos(UUID propertyId) {
+    public List<PhotoRequestDto> getPropertyPhotos(String propertyId) {
         List<Photo> photoList = photoRepository.findAllByPropertiesEquals(propertyId);
         return mapper.photoToPhotoRequestDtos(photoList);
     }
@@ -32,7 +32,7 @@ public class PhotoServiceImpl implements PhotoService {
     public PhotoRequestDto addPhoto(PhotoRequestDto photoRequestDto) {
         Photo photo = new Photo();
         //Set<Property> propertySet = propertyRepository.findAllById(propertyId);
-        photo.setId(UUID.randomUUID());
+        photo.setId(UUID.randomUUID().toString());
         photo.setUrl(photoRequestDto.getUrl());
         photo.setAlt(photoRequestDto.getAlt());
         photo.setProperties(photoRequestDto.getProperties()); // [Test]
@@ -41,14 +41,14 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public PhotoRequestDto deletePhoto(UUID photoId) {
+    public PhotoRequestDto deletePhoto(String photoId) {
         Photo photo = getPhotoMethod(photoId);
         return mapper.photoToPhotoRequestDto(photo);
     }
 
     // Service internal methods
-    public Photo getPhotoMethod(UUID photoId) {
+    public Photo getPhotoMethod(String photoId) {
         return photoRepository.findById(photoId).orElseThrow(() ->
-                new IllegalArgumentException("Photo not found"+photoId));
+                new IllegalArgumentException("Photo not found: "+photoId));
     }
 }

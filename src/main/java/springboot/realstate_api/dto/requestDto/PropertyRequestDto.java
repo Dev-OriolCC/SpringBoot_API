@@ -1,6 +1,7 @@
 package springboot.realstate_api.dto.requestDto;
 
 import lombok.Data;
+import springboot.realstate_api.model.Type;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -53,5 +54,14 @@ public class PropertyRequestDto {
     @Min(1900)
     private Integer year_built;
 
-    // No relationships for now
+    // Relationship Data
+    @NotNull
+    private String propertyTypeId;
+
+    @NotNull
+    private String propertyLocationId;
+
+    @NotNull
+    private String propertyUserId;
+
 }

@@ -10,8 +10,8 @@ import java.util.UUID;
 @Service
 public interface PhotoService {
 
-    public List<PhotoRequestDto> getPropertyPhotos(UUID propertyId);
+    public List<PhotoRequestDto> getPropertyPhotos(String propertyId);
     public PhotoRequestDto addPhoto(PhotoRequestDto photoRequestDto);
-    public PhotoRequestDto deletePhoto(UUID featureId);
+    public PhotoRequestDto deletePhoto(String featureId);
 
 }

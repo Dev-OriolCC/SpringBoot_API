@@ -19,8 +19,8 @@ import java.util.UUID;
 public class Property {
 
     @Id
-    @Column(name = "id", length = 16, unique = true, nullable = false)
-    private UUID id;
+    @Column(name = "id", length = 36, unique = true, nullable = false)
+    private String id;
 
     private String title;
     private Float price;
@@ -36,7 +36,7 @@ public class Property {
 
     // Relationships
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Type.class)
-    @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "type_id", referencedColumnName = "id", nullable = true)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Type type;
 

@@ -5,20 +5,29 @@ import org.springframework.stereotype.Service;
 import springboot.realstate_api.dto.mapper;
 import springboot.realstate_api.dto.requestDto.UserRequestDto;
 import springboot.realstate_api.dto.responseDto.UserResponseDto;
+import springboot.realstate_api.model.Location;
+import springboot.realstate_api.model.Role;
 import springboot.realstate_api.model.User;
+import springboot.realstate_api.repository.LocationRepository;
+import springboot.realstate_api.repository.RoleRepository;
 import springboot.realstate_api.repository.UserRepository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final LocationRepository locationRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, LocationRepository locationRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.locationRepository = locationRepository;
     }
 
     @Override
@@ -30,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDto addUser(UserRequestDto userRequestDto) {
         User user = new User();
-        user.setId(UUID.randomUUID());
+        user.setId(UUID.randomUUID().toString());
         user.setName(userRequestDto.getName());
         user.setLastname(userRequestDto.getLastname());
         user.setEmail(userRequestDto.getEmail());
@@ -44,18 +53,44 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDto deleteUser(UUID userId) {
+    public UserResponseDto deleteUser(String userId) {
         User user = userRepository.findById(userId).get();
         return mapper.userToUserResponseDto(user);
     }
 
     @Override
-    public UserResponseDto editUser(UserRequestDto UserRequestDto, UUID userId) {
+    public UserResponseDto editUser(UserRequestDto UserRequestDto, String userId) {
         User userToEdit = userRepository.findById(userId).get();
         //
 
         //
         userRepository.save(userToEdit);
         return mapper.userToUserResponseDto(userToEdit);
+    }
+
+    // Relational Data
+
+    @Override
+    public UserResponseDto addRoleToUser(String roleId, String userId) {
+        User user = userRepository.findById(userId).get();
+        if (Objects.nonNull(user.getRole())) {
+            throw new RuntimeException("Person has role");
+        }
+        Role role = roleRepository.findById(roleId).get();
+        user.setRole(role);
+        userRepository.save(user);
+        return mapper.userToUserResponseDto(user);
+    }
+
+    @Override
+    public UserResponseDto addLocationToUser(String locationId, String userId) {
+        User user = userRepository.findById(userId).get();
+        if (Objects.nonNull(user.getLocation())) {
+            throw new RuntimeException("Person has location");
+        }
+        Location location = locationRepository.findById(locationId).get();
+        user.setLocation(location);
+        userRepository.save(user);
+        return mapper.userToUserResponseDto(user);
     }
 }

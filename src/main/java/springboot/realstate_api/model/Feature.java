@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -18,6 +20,8 @@ public class Feature {
     @Column(name = "id", length = 36, unique = true, nullable = false)
     private String id;
 
+    @NotNull
+    @Size(min = 4, message = "Name must at least be greater than 4 characters")
     private String name;
 
     // Relationship

@@ -36,7 +36,7 @@ public class PropertyController {
     // Edit Property
 
     @DeleteMapping("deleteProperty/{id}")
-    public ResponseEntity<PropertyResponseDto> deleteProperty(@PathVariable final UUID id) {
+    public ResponseEntity<PropertyResponseDto> deleteProperty(@PathVariable final String id) {
         PropertyResponseDto propertyResponseDto = propertyService.deleteProperty(id);
         return new ResponseEntity<>(propertyResponseDto, HttpStatus.OK);
     }

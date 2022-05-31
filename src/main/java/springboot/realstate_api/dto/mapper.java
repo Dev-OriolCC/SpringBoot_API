@@ -27,10 +27,21 @@ public class mapper {
         propertyResponseDto.setDate_published(property.getDate_published());
         propertyResponseDto.setYear_built(property.getYear_built());
         // Relationship Data
-        propertyResponseDto.setType(typeToTypeRequestDto(property.getType()));
-        propertyResponseDto.setLocation(locationToLocationRequestDto(property.getLocation()));
-        propertyResponseDto.setUser(userToUserResponseDto(property.getUser())); // [TEST]
-        propertyResponseDto.setFeatures(property.getFeatures()); // Changed propertyResponseDto_Feature
+        if (property.getType() != null) {
+            propertyResponseDto.setType(typeToTypeRequestDto(property.getType()));
+        }
+        if(property.getLocation() != null){
+            propertyResponseDto.setLocation(locationToLocationRequestDto(property.getLocation()));
+        }
+        if(property.getUser() != null) {
+            propertyResponseDto.setUser(userToUserResponseDto(property.getUser())); // [TEST]
+        }
+        if(property.getFeatures() != null) {
+            propertyResponseDto.setFeatures(property.getFeatures()); // Changed propertyResponseDto_Feature
+        }
+        if (property.getPhotos() != null) {
+            propertyResponseDto.setPhotos(property.getPhotos()); // Changed photosResponseDto_Photo
+        }
         //propertyResponseDto.setPhotos(property.getPhotos()); // Changed photosResponseDto_Photo
         return propertyResponseDto;
     }
@@ -50,10 +61,17 @@ public class mapper {
         userResponseDto.setContact_email(user.getContact_email());
         userResponseDto.setTwitter(user.getTwitter());
         userResponseDto.setMobile(user.getMobile());
-        userResponseDto.setNumberProperties(user.getProperties().size());
+        //userResponseDto.setNumberProperties(user.getProperties().size());
+
+
         // Relationship Data
-        userResponseDto.setRole(roleToRoleRequestDto(user.getRole()));
-        userResponseDto.setLocation(locationToLocationRequestDto(user.getLocation()));
+        if (user.getRole() != null) {
+            userResponseDto.setRole(roleToRoleRequestDto(user.getRole()));
+        }
+        if (user.getLocation() != null) {
+            userResponseDto.setLocation(locationToLocationRequestDto(user.getLocation()));
+        }
+//
         //userResponseDto.setProperties(user.getProperties()); // [TEST] Changed Dto to Model
         return userResponseDto;
     }

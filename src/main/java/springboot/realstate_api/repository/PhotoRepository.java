@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface PhotoRepository extends JpaRepository<Photo, UUID> {
+public interface PhotoRepository extends JpaRepository<Photo, String> {
 
-    List<Photo> findAllByPropertiesEquals(UUID propertyId);
+    List<Photo> findAllByPropertiesEquals(String propertyId);
 }

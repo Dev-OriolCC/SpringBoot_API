@@ -8,6 +8,7 @@ import springboot.realstate_api.model.Feature;
 import springboot.realstate_api.repository.FeatureRepository;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 @Service

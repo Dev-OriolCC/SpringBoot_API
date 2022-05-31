@@ -6,6 +6,6 @@ import springboot.realstate_api.model.Role;
 import java.util.UUID;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, UUID>{
+public interface RoleRepository extends JpaRepository<Role, String>{
 
 }

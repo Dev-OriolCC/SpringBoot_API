@@ -35,7 +35,7 @@ public class UserRequestDto {
     @Size(min = 5, message = "Twitter @Username must at least be greater than 5 characters")
     private String twitter;
 
-    @Min(10) // Maybe change for 1_000_000_000
+    @Min(100000000) // Maybe change for 1_000_000_000
     private Long mobile;
 
     // No relationships for now

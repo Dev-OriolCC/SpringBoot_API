@@ -12,8 +12,8 @@ import java.util.UUID;
 public interface PropertyService {
     public List<PropertyResponseDto> getProperties();
     public PropertyResponseDto addProperty(PropertyRequestDto propertyRequestDto);
-    public PropertyResponseDto deleteProperty(UUID propertyId);
-    public PropertyResponseDto editProperty(PropertyRequestDto propertyRequestDto, UUID propertyId);
+    public PropertyResponseDto deleteProperty(String propertyId);
+    public PropertyResponseDto editProperty(PropertyRequestDto propertyRequestDto, String propertyId);
 
     // Relational
 

@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping("getUsers")
-    public ResponseEntity<List<UserResponseDto>> getProperties() {
+    public ResponseEntity<List<UserResponseDto>> getUsers() {
         List<UserResponseDto> userResponseDtoList = userService.getUsers();
         return new ResponseEntity<>(userResponseDtoList, HttpStatus.OK);
     }
@@ -40,13 +40,25 @@ public class UserController {
     //
 
     @DeleteMapping("deleteUser/{id}")
-    public ResponseEntity<UserResponseDto> deleteUser(@PathVariable final UUID id) {
+    public ResponseEntity<UserResponseDto> deleteUser(@PathVariable final String id) {
         UserResponseDto userResponseDto = userService.deleteUser(id);
         return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
     }
 
     // Relational Methods
+    @PutMapping("addRole/{roleId}/to/{userId}")
+    public ResponseEntity<UserResponseDto> addRole(@PathVariable final String roleId,
+                                                   @PathVariable final String userId) {
+        UserResponseDto userResponseDto = userService.addRoleToUser(roleId, userId);
+        return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
+    }
 
+    @PutMapping("addLocation/{locationId}/to/{userId}")
+    public ResponseEntity<UserResponseDto> addLocation(@PathVariable final String locationId,
+                                                   @PathVariable final String userId) {
+        UserResponseDto userResponseDto = userService.addLocationToUser(locationId, userId);
+        return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
+    }
 
 
 }

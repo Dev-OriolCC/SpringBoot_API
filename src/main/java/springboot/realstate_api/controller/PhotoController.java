@@ -21,7 +21,7 @@ public class PhotoController {
     }
 
     @GetMapping("getPropertyPhotos/{propertyId}")
-    public ResponseEntity<List<PhotoRequestDto>> getPropertyPhotos(@PathVariable final UUID propertyId) {
+    public ResponseEntity<List<PhotoRequestDto>> getPropertyPhotos(@PathVariable final String propertyId) {
         List<PhotoRequestDto> photoRequestDtoList = photoService.getPropertyPhotos(propertyId);
         return new ResponseEntity<>(photoRequestDtoList, HttpStatus.OK);
     }
@@ -33,7 +33,7 @@ public class PhotoController {
     }
 
     @DeleteMapping("deletePhoto/{propertyId}")
-    public ResponseEntity<PhotoRequestDto> deletePhoto(@PathVariable final UUID propertyId) {
+    public ResponseEntity<PhotoRequestDto> deletePhoto(@PathVariable final String propertyId) {
         PhotoRequestDto photoRequestDto = photoService.deletePhoto(propertyId);
         return new ResponseEntity<>(photoRequestDto, HttpStatus.OK);
     }

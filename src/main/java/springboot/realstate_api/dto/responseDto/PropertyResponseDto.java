@@ -5,6 +5,7 @@ import springboot.realstate_api.dto.requestDto.LocationRequestDto;
 import springboot.realstate_api.dto.requestDto.PhotoRequestDto;
 import springboot.realstate_api.dto.requestDto.TypeRequestDto;
 import springboot.realstate_api.model.Feature;
+import springboot.realstate_api.model.Photo;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -26,5 +27,5 @@ public class PropertyResponseDto {
     private LocationRequestDto location;
     private UserResponseDto user;
     private Set<Feature> features;
-    private Set<PhotoRequestDto> photos;
+    private Set<Photo> photos;
 }

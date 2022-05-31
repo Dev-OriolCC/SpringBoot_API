@@ -16,4 +16,10 @@ public class RealstateApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RealstateApiApplication.class, args);
 	}
+	/* Notes to improve
+	 * Add user Role & Location
+	 * Fix photo controller issues/nonsense
+	 * Add relational data
+	 * Check if some DTO responses can be fixed
+	 */
 }

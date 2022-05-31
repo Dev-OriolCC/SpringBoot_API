@@ -6,6 +6,6 @@ import springboot.realstate_api.model.Property;
 import java.util.UUID;
 
 @Repository
-public interface PropertyRepository extends JpaRepository<Property, UUID> {
+public interface PropertyRepository extends JpaRepository<Property, String> {
 
 }

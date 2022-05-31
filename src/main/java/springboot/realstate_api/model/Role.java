@@ -10,19 +10,19 @@ import java.util.UUID;
 public class Role {
 
     @Id
-    @Column(name = "id", length = 16, unique = true, nullable = false)
-    private UUID id;
+    @Column(name = "id", length = 36, unique = true, nullable = false)
+    private String id;
 
     private String name;
 
     // -- Relationship
 
     // Getters and Setters
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
