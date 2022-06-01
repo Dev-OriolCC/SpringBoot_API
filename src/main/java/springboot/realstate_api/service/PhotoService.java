@@ -11,7 +11,11 @@ import java.util.UUID;
 public interface PhotoService {
 
     public List<PhotoRequestDto> getPropertyPhotos(String propertyId);
-    public PhotoRequestDto addPhoto(PhotoRequestDto photoRequestDto);
-    public PhotoRequestDto deletePhoto(String featureId);
+    public PhotoRequestDto addPhotoToProperty(PhotoRequestDto photoRequestDto);
+    public PhotoRequestDto deletePhotoFromProperty(String photoId); // From property
+
+//    public PhotoRequestDto addPhotoToUser(PhotoRequestDto photoRequestDto);
+    // Delete from User
+
 
 }

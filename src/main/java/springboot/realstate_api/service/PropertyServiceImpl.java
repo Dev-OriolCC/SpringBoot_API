@@ -5,14 +5,8 @@ import org.springframework.stereotype.Service;
 import springboot.realstate_api.dto.mapper;
 import springboot.realstate_api.dto.requestDto.PropertyRequestDto;
 import springboot.realstate_api.dto.responseDto.PropertyResponseDto;
-import springboot.realstate_api.model.Location;
-import springboot.realstate_api.model.Property;
-import springboot.realstate_api.model.Type;
-import springboot.realstate_api.model.User;
-import springboot.realstate_api.repository.LocationRepository;
-import springboot.realstate_api.repository.PropertyRepository;
-import springboot.realstate_api.repository.TypeRepository;
-import springboot.realstate_api.repository.UserRepository;
+import springboot.realstate_api.model.*;
+import springboot.realstate_api.repository.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -24,13 +18,15 @@ public class PropertyServiceImpl implements PropertyService {
     private final TypeRepository typeRepository;
     private final LocationRepository locationRepository;
     private final UserRepository userRepository;
+    private final FeatureRepository featureRepository;
 
     @Autowired
-    public PropertyServiceImpl(PropertyRepository propertyRepository, TypeRepository typeRepository, LocationRepository locationRepository, UserRepository userRepository) {
+    public PropertyServiceImpl(PropertyRepository propertyRepository, TypeRepository typeRepository, LocationRepository locationRepository, UserRepository userRepository, FeatureRepository featureRepository) {
         this.propertyRepository = propertyRepository;
         this.typeRepository = typeRepository;
         this.locationRepository = locationRepository;
         this.userRepository = userRepository;
+        this.featureRepository = featureRepository;
     }
 
     @Override
@@ -87,6 +83,56 @@ public class PropertyServiceImpl implements PropertyService {
         //
         propertyRepository.save(propertyToEdit);
         return mapper.propertyToPropertyResponseDto(propertyToEdit);
+    }
+
+    @Override
+    public PropertyResponseDto updateTypeFromProperty(String typeId, String propertyId) {
+        Property property = propertyRepository.findById(propertyId).get();
+        Type type = typeRepository.findById(typeId).get();
+        if (property != null && type != null ) {
+            property.setType(null);
+            property.setType(type);
+            propertyRepository.save(property);
+            return mapper.propertyToPropertyResponseDto(property);
+        }
+        return null;
+    }
+
+    @Override
+    public PropertyResponseDto updateLocationFromProperty(String locationId, String propertyId) {
+        Property property = propertyRepository.findById(propertyId).get();
+        Location location = locationRepository.findById(locationId).get();
+        if (property != null && location != null ) {
+            property.setLocation(null);
+            property.setLocation(location);
+            propertyRepository.save(property);
+            return mapper.propertyToPropertyResponseDto(property);
+        }
+        return null;
+    }
+
+    @Override
+    public PropertyResponseDto addFeatureToProperty(String featureId, String propertyId) {
+        Feature feature = featureRepository.findById(featureId).get();
+        Property property = propertyRepository.findById(propertyId).get();
+        if (feature != null && property != null) {
+            property.getFeatures().add(feature);
+            propertyRepository.save(property);
+            return mapper.propertyToPropertyResponseDto(property);
+        }
+        return null;
+    }
+
+    @Override
+    public PropertyResponseDto deleteFeatureFromProperty(String featureId, String propertyId) {
+        Feature feature = featureRepository.findById(featureId).get();
+        Property property = propertyRepository.findById(propertyId).get();
+        if (feature != null && property != null) {
+            property.getFeatures().remove(feature);
+            propertyRepository.save(property);
+            return mapper.propertyToPropertyResponseDto(property);
+        }
+        return null;
     }
 
 

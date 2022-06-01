@@ -3,6 +3,7 @@ package springboot.realstate_api.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import springboot.realstate_api.dto.requestDto.FeatureRequestDto;
 import springboot.realstate_api.dto.requestDto.PropertyRequestDto;
@@ -34,7 +35,8 @@ public class PropertyController {
         return new ResponseEntity<>(propertyResponseDto, HttpStatus.OK);
     }
     // Edit Property
-
+    // ****
+    //
     @DeleteMapping("deleteProperty/{id}")
     public ResponseEntity<PropertyResponseDto> deleteProperty(@PathVariable final String id) {
         PropertyResponseDto propertyResponseDto = propertyService.deleteProperty(id);
@@ -42,4 +44,32 @@ public class PropertyController {
     }
 
     // Relational Methods
+    @PutMapping("updatePropertyType/{typeId}/from/{propertyId}")
+    public ResponseEntity<PropertyResponseDto> updateTypeFromProperty(@PathVariable final String typeId,
+                                                                      @PathVariable final String propertyId) {
+        PropertyResponseDto propertyResponseDto = propertyService.updateTypeFromProperty(typeId, propertyId);
+        return new ResponseEntity<>(propertyResponseDto, HttpStatus.OK);
+    }
+
+    @PutMapping("updatePropertyLocation/{locationId}/from/{propertyId}")
+    public ResponseEntity<PropertyResponseDto> updateLocationFromProperty(@PathVariable final String locationId,
+                                                                      @PathVariable final String propertyId) {
+        PropertyResponseDto propertyResponseDto = propertyService.updateLocationFromProperty(locationId, propertyId);
+        return new ResponseEntity<>(propertyResponseDto, HttpStatus.OK);
+    }
+
+    @PutMapping("addFeature/{featureId}/to/{propertyId}")
+    public ResponseEntity<PropertyResponseDto> addFeatureToProperty(@PathVariable final String featureId,
+                                                                          @PathVariable final String propertyId) {
+        PropertyResponseDto propertyResponseDto = propertyService.addFeatureToProperty(featureId, propertyId);
+        return new ResponseEntity<>(propertyResponseDto, HttpStatus.OK);
+    }
+
+    @PutMapping("deleteFeature/{featureId}/from/{propertyId}")
+    public ResponseEntity<PropertyResponseDto> deleteFeatureFromProperty(@PathVariable final String featureId,
+                                                                    @PathVariable final String propertyId) {
+        PropertyResponseDto propertyResponseDto = propertyService.deleteFeatureFromProperty(featureId, propertyId);
+        return new ResponseEntity<>(propertyResponseDto, HttpStatus.OK);
+    }
+
 }

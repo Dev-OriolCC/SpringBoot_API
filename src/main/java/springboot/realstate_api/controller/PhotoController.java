@@ -26,15 +26,15 @@ public class PhotoController {
         return new ResponseEntity<>(photoRequestDtoList, HttpStatus.OK);
     }
 
-    @PostMapping("addPhoto")
-    public ResponseEntity<PhotoRequestDto> addPhoto(@RequestBody final PhotoRequestDto photoRequestDto) {
-        PhotoRequestDto photoRequestDto1 = photoService.addPhoto(photoRequestDto);
+    @PostMapping("addPhotoToProperty")
+    public ResponseEntity<PhotoRequestDto> addPhotoToProperty(@RequestBody final PhotoRequestDto photoRequestDto) {
+        PhotoRequestDto photoRequestDto1 = photoService.addPhotoToProperty(photoRequestDto);
         return new ResponseEntity<>(photoRequestDto1, HttpStatus.OK);
     }
 
-    @DeleteMapping("deletePhoto/{propertyId}")
-    public ResponseEntity<PhotoRequestDto> deletePhoto(@PathVariable final String propertyId) {
-        PhotoRequestDto photoRequestDto = photoService.deletePhoto(propertyId);
+    @DeleteMapping("deletePhoto/{photoId}")
+    public ResponseEntity<PhotoRequestDto> deletePhoto(@PathVariable final String photoId) {
+        PhotoRequestDto photoRequestDto = photoService.deletePhotoFromProperty(photoId);
         return new ResponseEntity<>(photoRequestDto, HttpStatus.OK);
     }
 

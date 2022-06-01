@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import springboot.realstate_api.dto.mapper;
 import springboot.realstate_api.dto.requestDto.PhotoRequestDto;
 import springboot.realstate_api.model.Photo;
+import springboot.realstate_api.model.Property;
 import springboot.realstate_api.repository.PhotoRepository;
 import springboot.realstate_api.repository.PropertyRepository;
 import java.util.List;
@@ -29,20 +30,28 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public PhotoRequestDto addPhoto(PhotoRequestDto photoRequestDto) {
+    public PhotoRequestDto addPhotoToProperty(PhotoRequestDto photoRequestDto) {
         Photo photo = new Photo();
         //Set<Property> propertySet = propertyRepository.findAllById(propertyId);
         photo.setId(UUID.randomUUID().toString());
         photo.setUrl(photoRequestDto.getUrl());
         photo.setAlt(photoRequestDto.getAlt());
-        photo.setProperties(photoRequestDto.getProperties()); // [Test]
+        Property property = propertyRepository.findById(photoRequestDto.getPropertyId()).get();
+
+        property.getPhotos().add(photo); // [Test]
         photoRepository.save(photo);
         return mapper.photoToPhotoRequestDto(photo);
     }
 
     @Override
-    public PhotoRequestDto deletePhoto(String photoId) {
+    public PhotoRequestDto deletePhotoFromProperty(String photoId) {
         Photo photo = getPhotoMethod(photoId);
+        Property property = propertyRepository.findByPhotos(photo);
+        // Remove relation
+        property.getPhotos().remove(photo);
+        // Delete actual photo
+        propertyRepository.save(property);
+        photoRepository.delete(photo);
         return mapper.photoToPhotoRequestDto(photo);
     }
 

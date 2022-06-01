@@ -14,7 +14,12 @@ public interface PropertyService {
     public PropertyResponseDto addProperty(PropertyRequestDto propertyRequestDto);
     public PropertyResponseDto deleteProperty(String propertyId);
     public PropertyResponseDto editProperty(PropertyRequestDto propertyRequestDto, String propertyId);
-
     // Relational
+    public PropertyResponseDto updateTypeFromProperty(String typeId, String propertyId);
+    public PropertyResponseDto updateLocationFromProperty(String locationId, String propertyId);
+
+    public PropertyResponseDto addFeatureToProperty(String featureId, String propertyId);
+    public PropertyResponseDto deleteFeatureFromProperty(String featureId, String propertyId);
+
 
 }

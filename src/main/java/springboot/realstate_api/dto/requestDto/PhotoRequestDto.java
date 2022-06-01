@@ -9,5 +9,6 @@ public class PhotoRequestDto {
 
     private String url;
     private String alt;
-    private Set<Property> properties;
+    private String propertyId;
+    //private Set<Property> properties;
 }
