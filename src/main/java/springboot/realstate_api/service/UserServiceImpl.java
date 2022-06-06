@@ -48,6 +48,15 @@ public class UserServiceImpl implements UserService {
         user.setMobile(userRequestDto.getMobile());
 
         // Relational Data
+        if (userRequestDto.getRoleId() != null) {
+            Role role = roleRepository.findById(userRequestDto.getRoleId()).get();
+            user.setRole(role);
+        } else {
+            // Default role = "user"
+            Role role = roleRepository.findById("fa851c0a-dfca-11ec-abc0-d493900984c5").get();
+            user.setRole(role);
+        }
+
         userRepository.save(user);
         return mapper.userToUserResponseDto(user);
     }

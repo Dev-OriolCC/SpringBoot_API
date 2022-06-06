@@ -61,7 +61,9 @@ public class mapper {
         userResponseDto.setContact_email(user.getContact_email());
         userResponseDto.setTwitter(user.getTwitter());
         userResponseDto.setMobile(user.getMobile());
-        //userResponseDto.setNumberProperties(user.getProperties().size());
+//        if (user.getProperties().size() > 0) {
+//            userResponseDto.setNumberProperties(user.getProperties().size());
+//        }
 
 
         // Relationship Data

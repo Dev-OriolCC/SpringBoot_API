@@ -39,5 +39,6 @@ public class UserRequestDto {
     private Long mobile;
 
     // No relationships for now
+    private String roleId;
 
 }
