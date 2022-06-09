@@ -3,8 +3,6 @@ package springboot.realstate_api.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Version;
-import java.util.UUID;
 
 @Entity
 public class Role {

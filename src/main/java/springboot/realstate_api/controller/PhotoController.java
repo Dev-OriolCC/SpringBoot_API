@@ -8,7 +8,6 @@ import springboot.realstate_api.dto.requestDto.PhotoRequestDto;
 import springboot.realstate_api.service.PhotoService;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/photo")

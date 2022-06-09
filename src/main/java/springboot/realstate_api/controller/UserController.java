@@ -4,14 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springboot.realstate_api.dto.requestDto.PropertyRequestDto;
 import springboot.realstate_api.dto.requestDto.UserRequestDto;
-import springboot.realstate_api.dto.responseDto.PropertyResponseDto;
 import springboot.realstate_api.dto.responseDto.UserResponseDto;
 import springboot.realstate_api.service.UserService;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("user")

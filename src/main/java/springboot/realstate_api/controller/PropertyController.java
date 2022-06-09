@@ -3,15 +3,12 @@ package springboot.realstate_api.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
-import springboot.realstate_api.dto.requestDto.FeatureRequestDto;
 import springboot.realstate_api.dto.requestDto.PropertyRequestDto;
 import springboot.realstate_api.dto.responseDto.PropertyResponseDto;
 import springboot.realstate_api.service.PropertyService;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("property")

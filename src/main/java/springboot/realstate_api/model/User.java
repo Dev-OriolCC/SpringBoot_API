@@ -1,11 +1,8 @@
 package springboot.realstate_api.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import springboot.realstate_api.dto.responseDto.PropertyResponseDto;
-
 import javax.persistence.*;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 public class User {

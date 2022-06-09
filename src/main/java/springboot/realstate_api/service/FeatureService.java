@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import springboot.realstate_api.dto.requestDto.FeatureRequestDto;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public interface FeatureService {

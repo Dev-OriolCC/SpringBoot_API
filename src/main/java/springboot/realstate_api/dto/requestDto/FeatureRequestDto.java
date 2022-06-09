@@ -1,12 +1,7 @@
 package springboot.realstate_api.dto.requestDto;
 import lombok.Data;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 @Data
 public class FeatureRequestDto {
-
     private String name;
 }

@@ -1,7 +1,6 @@
 package springboot.realstate_api.dto.requestDto;
 
 import lombok.Data;
-import springboot.realstate_api.model.Type;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

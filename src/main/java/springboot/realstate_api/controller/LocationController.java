@@ -9,7 +9,6 @@ import springboot.realstate_api.model.Location;
 import springboot.realstate_api.service.LocationService;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("location")

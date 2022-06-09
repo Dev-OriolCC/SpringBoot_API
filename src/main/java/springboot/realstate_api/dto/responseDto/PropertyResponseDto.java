@@ -2,7 +2,6 @@ package springboot.realstate_api.dto.responseDto;
 
 import lombok.Data;
 import springboot.realstate_api.dto.requestDto.LocationRequestDto;
-import springboot.realstate_api.dto.requestDto.PhotoRequestDto;
 import springboot.realstate_api.dto.requestDto.TypeRequestDto;
 import springboot.realstate_api.model.Feature;
 import springboot.realstate_api.model.Photo;

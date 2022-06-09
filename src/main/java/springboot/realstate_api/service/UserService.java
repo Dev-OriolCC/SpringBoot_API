@@ -5,7 +5,6 @@ import springboot.realstate_api.dto.requestDto.UserRequestDto;
 import springboot.realstate_api.dto.responseDto.UserResponseDto;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public interface UserService {

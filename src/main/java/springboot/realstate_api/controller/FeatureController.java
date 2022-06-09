@@ -8,7 +8,6 @@ import springboot.realstate_api.dto.requestDto.FeatureRequestDto;
 import springboot.realstate_api.service.FeatureService;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/feature")

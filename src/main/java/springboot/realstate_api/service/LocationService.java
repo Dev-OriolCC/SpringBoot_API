@@ -5,7 +5,6 @@ import springboot.realstate_api.dto.requestDto.LocationRequestDto;
 import springboot.realstate_api.model.Location;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public interface LocationService {
