@@ -20,6 +20,7 @@ public class RealstateApiApplication {
 
 	/* Notes to improve
 	* Upload Image files
+	* Link Image file with table
 	* Add JWT authentication
 	 */
 }
