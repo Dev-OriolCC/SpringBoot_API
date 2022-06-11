@@ -23,14 +23,20 @@ public class Photo {
     @Column(name = "id", length = 36, unique = true, nullable = false)
     private String id;
 
-    @NotNull
-    @Pattern(message = "URL not valid", regexp = "https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,}")
-    @Size(min = 4, message = "URL must at least be greater than 4 characters")
+//    @NotNull
+//    @Pattern(message = "URL not valid", regexp = "https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,}")
+//    @Size(min = 4, message = "URL must at least be greater than 4 characters")
     private String url;
 
     @NotNull
     @Size(min = 4, message = "ALT must at least be greater than 4 characters")
-    private String alt;
+    private String name;
+
+    @NotNull
+    private String fileType;
+
+    @NotNull
+    private Long size;
 
     // Relationship
 

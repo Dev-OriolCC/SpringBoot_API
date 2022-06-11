@@ -25,7 +25,9 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     public List<PhotoRequestDto> getPropertyPhotos(String propertyId) {
-        List<Photo> photoList = photoRepository.findAllByPropertiesEquals(propertyId);
+        Property property = propertyRepository.findById(propertyId).get();
+        List<Photo> photoList = property.getPhotos().stream().toList();
+
         return mapper.photoToPhotoRequestDtos(photoList);
     }
 
@@ -35,7 +37,9 @@ public class PhotoServiceImpl implements PhotoService {
         //Set<Property> propertySet = propertyRepository.findAllById(propertyId);
         photo.setId(UUID.randomUUID().toString());
         photo.setUrl(photoRequestDto.getUrl());
-        photo.setAlt(photoRequestDto.getAlt());
+        photo.setName(photoRequestDto.getName());
+        photo.setSize(photoRequestDto.getSize());
+        photo.setFileType(photoRequestDto.getFileType());
         Property property = propertyRepository.findById(photoRequestDto.getPropertyId()).get();
 
         property.getPhotos().add(photo); // [Test]

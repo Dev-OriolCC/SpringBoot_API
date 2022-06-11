@@ -37,15 +37,27 @@ public class PhotoController {
     }
 
     // ------------------------- FILE UPLOAD -------------------------
-    @PostMapping("/uploadFile")
-    public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
+    @PostMapping("/uploadFile/{propertyId}")
+    public UploadFileResponse uploadFile(
+            @RequestParam("file") MultipartFile file,
+            @PathVariable final String propertyId
+            ) {
         String fileName = fileStorageService.storeFile(file);
-
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/downloadFile/")
+                //.path("/downloadFile/")
+                .path("/images/")
                 .path(fileName)
                 .toUriString();
+        // TEST
+            PhotoRequestDto photoRequestDto = new PhotoRequestDto();
+            photoRequestDto.setUrl(fileDownloadUri);
+            photoRequestDto.setName(fileName);
+            photoRequestDto.setPropertyId(propertyId);
+            photoRequestDto.setFileType(file.getContentType());
+            photoRequestDto.setSize(file.getSize());
 
+            photoService.addPhotoToProperty(photoRequestDto);
+        //
         return new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
@@ -54,7 +66,6 @@ public class PhotoController {
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
         Resource resource = fileStorageService.loadFileAsResource(fileName);
-
         // Try to determine file's content type
         String contentType = null;
         try {
@@ -62,12 +73,10 @@ public class PhotoController {
         } catch (IOException ex) {
             logger.info("Could not determine file type.");
         }
-
         // Fallback to the default content type if type could not be determined
         if(contentType == null) {
             contentType = "application/octet-stream";
         }
-
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(contentType))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
@@ -75,22 +84,25 @@ public class PhotoController {
     }
 
     // ------------------------- URL UPLOAD -------------------------
+    @DeleteMapping("deletePhoto/{photoId}") // DELETE[URL]
+    public ResponseEntity<PhotoRequestDto> deletePhoto(@PathVariable final String photoId) throws IOException {
+        PhotoRequestDto photoRequestDto = photoService.deletePhotoFromProperty(photoId);
+        fileStorageService.deleteFile(photoRequestDto.getName()); //new
+        return new ResponseEntity<>(photoRequestDto, HttpStatus.OK);
+    }
+
     @GetMapping("getPropertyPhotos/{propertyId}")
     public ResponseEntity<List<PhotoRequestDto>> getPropertyPhotos(@PathVariable final String propertyId) {
         List<PhotoRequestDto> photoRequestDtoList = photoService.getPropertyPhotos(propertyId);
         return new ResponseEntity<>(photoRequestDtoList, HttpStatus.OK);
     }
 
-    @PostMapping("addPhotoToProperty")
-    public ResponseEntity<PhotoRequestDto> addPhotoToProperty(@RequestBody final PhotoRequestDto photoRequestDto) {
-        PhotoRequestDto photoRequestDto1 = photoService.addPhotoToProperty(photoRequestDto);
-        return new ResponseEntity<>(photoRequestDto1, HttpStatus.OK);
-    }
 
-    @DeleteMapping("deletePhoto/{photoId}")
-    public ResponseEntity<PhotoRequestDto> deletePhoto(@PathVariable final String photoId) {
-        PhotoRequestDto photoRequestDto = photoService.deletePhotoFromProperty(photoId);
-        return new ResponseEntity<>(photoRequestDto, HttpStatus.OK);
-    }
+//    @PostMapping("addPhotoToProperty") // UPLOAD [URL]
+//    public ResponseEntity<PhotoRequestDto> addPhotoToProperty(@RequestBody final PhotoRequestDto photoRequestDto) {
+//        PhotoRequestDto photoRequestDto1 = photoService.addPhotoToProperty(photoRequestDto);
+//        return new ResponseEntity<>(photoRequestDto1, HttpStatus.OK);
+//    }
+
 
 }

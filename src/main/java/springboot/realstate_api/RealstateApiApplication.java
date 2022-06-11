@@ -15,13 +15,15 @@ import springboot.realstate_api.property.FileStorageProperties;
 })
 public class RealstateApiApplication {
 	public static void main(String[] args) {
+
 		SpringApplication.run(RealstateApiApplication.class, args);
 	}
 
 	/* Notes to improve
-	* Upload Image files
-	* Link Image file with table
+	* Unique name for IMG //
+	* Clean spaces and special characters //
 	* Add JWT authentication
+	* Fix issue while fetching property photos
 	 */
 }
 

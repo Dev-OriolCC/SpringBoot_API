@@ -123,7 +123,7 @@ public class mapper {
     public static PhotoRequestDto photoToPhotoRequestDto(Photo photo) {
         PhotoRequestDto photoRequestDto = new PhotoRequestDto();
         photoRequestDto.setUrl(photo.getUrl());
-        photoRequestDto.setAlt(photo.getAlt());
+        photoRequestDto.setName(photo.getName());
         return photoRequestDto;
     }
     public static List<PhotoRequestDto> photoToPhotoRequestDtos(List<Photo> photos) {
