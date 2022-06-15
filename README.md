@@ -8,6 +8,7 @@ This is a REST Api for a fiction Real State Company © I built this API to pract
 * [Java-17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) - Backend Programming Language.
 * [Spring Boot 2.5.6](https://spring.io/blog/2021/10/21/spring-boot-2-5-6-is-now-available) - Backend Framework.
 * [Spring Data JPA](https://spring.io/projects/spring-data-jpa) - Java Persistence API
+* [JWT](https://jwt.io/) -  Security token for API Authentication
 
 ## Features ✔😎
 * REST Api contains users, properties, roles, features, photos, location and type (of properties).
@@ -15,6 +16,8 @@ This is a REST Api for a fiction Real State Company © I built this API to pract
 * Implementing Data Transfer Objects (DTOs).
 * Users can Create-Read-Update-Delete-Search properties, features, photos and locations.
 * Swagger to test API.
+* Upload photos of properties (Many-to-Many)
+* JWT Authentication
 
 
 
@@ -23,3 +26,5 @@ This is a REST Api for a fiction Real State Company © I built this API to pract
 * **Oriol Cortez Cesar** - [Dev-OriolCC](https://github.com/Dev-OriolCC)
 
 ## Screenshots and gifs 📸
+![](screenshots/scr_2.png)
+_1.1 Database_

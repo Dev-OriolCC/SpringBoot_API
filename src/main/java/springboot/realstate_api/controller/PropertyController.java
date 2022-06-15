@@ -20,7 +20,7 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-    @GetMapping("getProperties")
+    @GetMapping("/getProperties")
     public ResponseEntity<List<PropertyResponseDto>> getProperties() {
         List<PropertyResponseDto> propertyResponseDtoList = propertyService.getProperties();
         return new ResponseEntity<>(propertyResponseDtoList, HttpStatus.OK);
