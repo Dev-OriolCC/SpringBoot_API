@@ -1,6 +1,7 @@
 package springboot.realstate_api.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import springboot.realstate_api.dto.mapper;
 import springboot.realstate_api.dto.requestDto.UserRequestDto;
@@ -22,6 +23,9 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final LocationRepository locationRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, LocationRepository locationRepository) {
@@ -46,6 +50,10 @@ public class UserServiceImpl implements UserService {
         user.setContact_email(userRequestDto.getContact_email());
         user.setTwitter(userRequestDto.getTwitter());
         user.setMobile(userRequestDto.getMobile());
+        // Plain Text
+        //user.setPassword(userRequestDto.getPassword());
+        // Hash
+        user.setPassword(passwordEncoder.encode(userRequestDto.getPassword()));
 
         // Relational Data
         if (userRequestDto.getRoleId() != null) {
@@ -53,7 +61,7 @@ public class UserServiceImpl implements UserService {
             user.setRole(role);
         } else {
             // Default role = "user"
-            Role role = roleRepository.findById("fa851c0a-dfca-11ec-abc0-d493900984c5").get();
+            Role role = roleRepository.findById("77a3c3fc-eeb8-11ec-b3a9-d493900984c5").get();
             user.setRole(role);
         }
 

@@ -6,5 +6,5 @@ import springboot.realstate_api.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
-
+    User findByEmail(String email);
 }

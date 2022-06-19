@@ -5,13 +5,19 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import springboot.realstate_api.filter.JwtFilter;
+import springboot.realstate_api.service.UserService;
 import springboot.realstate_api.service.UserServiceAuth;
 
 @Configuration
@@ -22,11 +28,15 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter implemen
     private UserServiceAuth userServiceAuth;
     @Autowired
     private JwtFilter jwtFilter;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.userDetailsService(userServiceAuth);
+        //auth.userDetailsService(userServiceAuth);
+        auth.authenticationProvider(authProvider());
     }
 
     @Override
@@ -53,7 +63,19 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter implemen
         // I think so
     }
 
+    // Hashing passwords
+    @Bean
+    public AuthenticationProvider authProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(passwordEncoder());
+        provider.setUserDetailsService(userDetailsService); //?
+        return provider;
+    }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 //    @Override
 //    protected void registerAuthentication(AuthenticationManagerBuilder authManagerBuilder) throws Exception {

@@ -20,18 +20,18 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 })
 public class RealstateApiApplication {
 	public static void main(String[] args) {
-
 		SpringApplication.run(RealstateApiApplication.class, args);
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
-	}
+//	@Bean
+//	public PasswordEncoder passwordEncoder() {
+//		return NoOpPasswordEncoder.getInstance();
+//	}
 
 	/* Notes to improve
 	* Add JWT authentication
-	* Fix issue while fetching property photos
+	* Change to use actual username and password from DB for auth
+	* Password Hashing
 	 */
 }
 
