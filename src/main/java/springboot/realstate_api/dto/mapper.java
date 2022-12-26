@@ -1,9 +1,11 @@
 package springboot.realstate_api.dto;
 
+import springboot.realstate_api.auth.entity.User;
+import springboot.realstate_api.data.entities.*;
 import springboot.realstate_api.dto.requestDto.*;
 import springboot.realstate_api.dto.responseDto.PropertyResponseDto;
 import springboot.realstate_api.dto.responseDto.UserResponseDto;
-import springboot.realstate_api.model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -9,7 +9,7 @@ This is a REST Api for a fiction Real State Company © I built this API to pract
 * [Spring Boot 2.5.6](https://spring.io/blog/2021/10/21/spring-boot-2-5-6-is-now-available) - Backend Framework.
 * [Spring Data JPA](https://spring.io/projects/spring-data-jpa) - Java Persistence API
 * [JWT](https://jwt.io/) -  Security token for API Authentication
-
+* [Clean Architecture](https://www.baeldung.com/spring-boot-clean-architecture) - Clean Architecture 
 ## Features ✔😎
 * REST Api contains users, properties, roles, features, photos, location and type (of properties).
 * Database relationships One-to-Many, Many-to-Many, One-to-One.
