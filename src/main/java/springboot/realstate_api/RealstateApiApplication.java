@@ -8,13 +8,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import springboot.realstate_api.property.FileStorageProperties;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication
-@EnableJpaRepositories(basePackages = {"springboot.realstate_api.model", "springboot.realstate_api.repository"})
-@EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")
-@EnableSwagger2
+//@EnableJpaRepositories(basePackages = {"springboot.realstate_api.model", "springboot.realstate_api.repository"})
+//@EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")
+//@EnableSwagger2
 @EnableConfigurationProperties({
 		FileStorageProperties.class
 })
+@SpringBootApplication
 public class RealstateApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RealstateApiApplication.class, args);

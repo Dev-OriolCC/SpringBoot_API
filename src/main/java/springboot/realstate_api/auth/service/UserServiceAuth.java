@@ -13,7 +13,7 @@ import java.util.ArrayList;
 @Service
 public class UserServiceAuth implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    UserRepository userRepository;
 
     @Autowired
     public UserServiceAuth(UserRepository userRepository) {

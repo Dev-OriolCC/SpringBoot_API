@@ -1,12 +1,14 @@
-package springboot.realstate_api.dto.responseDto;
+package springboot.realstate_api.web.dto.responseDto;
 
-import lombok.Data;
-import springboot.realstate_api.dto.requestDto.LocationRequestDto;
-import springboot.realstate_api.dto.requestDto.RoleRequestDto;
+import lombok.Getter;
+import lombok.Setter;
+import springboot.realstate_api.web.dto.requestDto.LocationRequestDto;
+import springboot.realstate_api.web.dto.requestDto.RoleRequestDto;
 
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 public class UserResponseDto {
     private String name;
     private String lastname;

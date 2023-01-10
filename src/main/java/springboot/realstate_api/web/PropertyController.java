@@ -4,19 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springboot.realstate_api.dto.requestDto.PropertyRequestDto;
-import springboot.realstate_api.dto.responseDto.PropertyResponseDto;
-import springboot.realstate_api.domain.properties.PropertyService;
+import springboot.realstate_api.web.dto.requestDto.PropertyRequestDto;
+import springboot.realstate_api.web.dto.responseDto.PropertyResponseDto;
+import springboot.realstate_api.domain.properties.PropertyGateway;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("property")
 public class PropertyController {
-    private final PropertyService propertyService;
+    private final PropertyGateway propertyService;
 
     @Autowired
-    public PropertyController(PropertyService propertyService) {
+    public PropertyController(PropertyGateway propertyService) {
         this.propertyService = propertyService;
     }
 

@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springboot.realstate_api.dto.requestDto.LocationRequestDto;
+import springboot.realstate_api.web.dto.requestDto.LocationRequestDto;
 import springboot.realstate_api.data.entities.Location;
-import springboot.realstate_api.domain.locations.LocationService;
+import springboot.realstate_api.domain.locations.LocationGateway;
 
 import java.util.List;
 
@@ -14,10 +14,10 @@ import java.util.List;
 @RequestMapping("location")
 public class LocationController {
 
-    private final LocationService locationService;
+    private final LocationGateway locationService;
 
     @Autowired
-    public LocationController(LocationService locationService) {
+    public LocationController(LocationGateway locationService) {
         this.locationService = locationService;
     }
     //

@@ -9,10 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import springboot.realstate_api.dto.requestDto.PhotoRequestDto;
-import springboot.realstate_api.dto.responseDto.UploadFileResponse;
+import springboot.realstate_api.web.dto.requestDto.PhotoRequestDto;
+import springboot.realstate_api.web.dto.responseDto.UploadFileResponse;
 import springboot.realstate_api.domain.files.FileStorageService;
-import springboot.realstate_api.domain.photos.PhotoService;
+import springboot.realstate_api.domain.photos.PhotoGateway;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,11 +27,11 @@ public class PhotoController {
 
     private static final Logger logger =  LoggerFactory.getLogger(PhotoController.class);
 
-    private final PhotoService photoService;
+    private final PhotoGateway photoService;
     private final FileStorageService fileStorageService;
 
     @Autowired
-    public PhotoController(PhotoService photoService, FileStorageService fileStorageService) {
+    public PhotoController(PhotoGateway photoService, FileStorageService fileStorageService) {
         this.photoService = photoService;
         this.fileStorageService = fileStorageService;
     }

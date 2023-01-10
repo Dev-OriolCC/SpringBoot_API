@@ -1,34 +1,32 @@
 package springboot.realstate_api.data.entities;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Role {
-
-    @Id
-    @Column(name = "id", length = 36, unique = true, nullable = false)
-    private String id;
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@Table(name = "roles")
+@SQLDelete(sql = "UPDATE roles SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
+public class Role extends BaseEntity {
+    /*
+     * @String id
+     * @LocalDateTime createdAt
+     * @LocalDateTime updatedAt
+     * @Boolean deleted
+     */
 
     private String name;
-
-    // -- Relationship
-
-    // Getters and Setters
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

@@ -7,5 +7,4 @@ import springboot.realstate_api.data.entities.Location;
 @Repository
 public interface LocationRepository extends JpaRepository<Location, String> {
 
-
 }

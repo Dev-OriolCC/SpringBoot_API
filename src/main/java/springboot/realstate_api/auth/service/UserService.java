@@ -1,8 +1,8 @@
 package springboot.realstate_api.auth.service;
 
 import org.springframework.stereotype.Service;
-import springboot.realstate_api.dto.requestDto.UserRequestDto;
-import springboot.realstate_api.dto.responseDto.UserResponseDto;
+import springboot.realstate_api.web.dto.requestDto.UserRequestDto;
+import springboot.realstate_api.web.dto.responseDto.UserResponseDto;
 
 import java.util.List;
 

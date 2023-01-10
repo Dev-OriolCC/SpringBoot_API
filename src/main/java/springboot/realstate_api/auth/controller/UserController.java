@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springboot.realstate_api.dto.requestDto.UserRequestDto;
-import springboot.realstate_api.dto.responseDto.UserResponseDto;
+import springboot.realstate_api.web.dto.requestDto.UserRequestDto;
+import springboot.realstate_api.web.dto.responseDto.UserResponseDto;
 import springboot.realstate_api.auth.service.UserService;
 
 import java.util.List;

@@ -1,19 +1,36 @@
 package springboot.realstate_api.data.entities;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Location {
-
-    @Id
-    @Column(name = "id", length = 36, unique = true, nullable = false)
-    private String id;
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@Table(name = "locations")
+@SQLDelete(sql = "UPDATE locations SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
+public class Location extends BaseEntity {
+    /*
+     * @String id
+     * @LocalDateTime createdAt
+     * @LocalDateTime updatedAt
+     * @Boolean deleted
+     */
 
     @NotNull
     @Size(min = 4, message = "Country must at least be greater than 4 characters")
@@ -40,62 +57,4 @@ public class Location {
 
     // Relationship
 
-
-    // Getters and Setters
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public Integer getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(Integer zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getAvenue() {
-        return avenue;
-    }
-
-    public void setAvenue(String avenue) {
-        this.avenue = avenue;
-    }
 }

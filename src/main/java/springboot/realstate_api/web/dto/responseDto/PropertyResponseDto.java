@@ -1,15 +1,18 @@
-package springboot.realstate_api.dto.responseDto;
+package springboot.realstate_api.web.dto.responseDto;
 
 import lombok.Data;
-import springboot.realstate_api.dto.requestDto.LocationRequestDto;
-import springboot.realstate_api.dto.requestDto.TypeRequestDto;
+import lombok.Getter;
+import lombok.Setter;
+import springboot.realstate_api.web.dto.requestDto.LocationRequestDto;
+import springboot.realstate_api.web.dto.requestDto.TypeRequestDto;
 import springboot.realstate_api.data.entities.Feature;
 import springboot.realstate_api.data.entities.Photo;
 
 import java.time.LocalDate;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 public class PropertyResponseDto {
     private String title;
     private Float price;

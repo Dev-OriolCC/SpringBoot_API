@@ -1,8 +1,10 @@
-package springboot.realstate_api.dto.requestDto;
+package springboot.realstate_api.web.dto.requestDto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class LocationRequestDto {
 
     private String country;

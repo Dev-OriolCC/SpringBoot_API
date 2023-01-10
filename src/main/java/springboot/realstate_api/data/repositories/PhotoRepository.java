@@ -7,7 +7,6 @@ import java.util.List;
 
 @Repository
 public interface PhotoRepository extends JpaRepository<Photo, String> {
-
     List<Photo> findPhotosByPropertiesIs(String properties);
     List<Photo> findAllByProperties(String propertyId);
 }

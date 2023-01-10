@@ -1,48 +1,48 @@
 package springboot.realstate_api.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springboot.realstate_api.dto.requestDto.FeatureRequestDto;
-import springboot.realstate_api.domain.features.FeatureService;
+import springboot.realstate_api.domain.features.Feature;
+import springboot.realstate_api.web.dto.requestDto.FeatureRequestDto;
+import springboot.realstate_api.domain.features.FeatureGateway;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/feature")
+@AllArgsConstructor
 public class FeatureController {
 
-    private final FeatureService featureService;
+    private final FeatureGateway featureService;
 
-    @Autowired
-    public FeatureController(FeatureService featureService) {
-        this.featureService = featureService;
-    }
-
-    // Here go all methods to use our Feature Object
-    @GetMapping("getFeatures")
+    @GetMapping
     public ResponseEntity<List<FeatureRequestDto>> getFeatures() {
         List<FeatureRequestDto> featureList = featureService.getFeatures();
         return new ResponseEntity<>(featureList, HttpStatus.OK);
     }
 
-    @PostMapping("postFeature")
+    @PostMapping
     public ResponseEntity<FeatureRequestDto> addFeature(@RequestBody final FeatureRequestDto featureRequestDto) {
-        FeatureRequestDto featureRequestDto1 = featureService.addFeature(featureRequestDto);
+        FeatureRequestDto featureRequestDto1 = featureService.addFeature(toModel(featureRequestDto));
         return new ResponseEntity<>(featureRequestDto1, HttpStatus.OK);
     }
 
-    @GetMapping("getFeature/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<FeatureRequestDto> getFeature(@PathVariable final String id) {
         FeatureRequestDto featureRequestDto = featureService.getFeature(id);
         return new ResponseEntity<>(featureRequestDto, HttpStatus.OK);
     }
 
-    @DeleteMapping("deleteFeature/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<FeatureRequestDto> deleteFeature(@PathVariable final String id) {
         FeatureRequestDto featureRequestDto = featureService.deleteFeature(id);
         return new ResponseEntity<>(featureRequestDto, HttpStatus.OK);
+    }
+
+    public Feature toModel(FeatureRequestDto featureRequestDto) {
+        return Feature.builder().name(featureRequestDto.getName()).build();
     }
 
 }
