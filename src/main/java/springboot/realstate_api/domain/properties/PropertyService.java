@@ -1,26 +1,49 @@
 package springboot.realstate_api.domain.properties;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import springboot.realstate_api.auth.entity.User;
-import springboot.realstate_api.auth.repository.UserRepository;
-import springboot.realstate_api.data.entities.Feature;
-import springboot.realstate_api.data.entities.Location;
-import springboot.realstate_api.data.entities.Property;
-import springboot.realstate_api.data.entities.Type;
-import springboot.realstate_api.data.repositories.FeatureRepository;
-import springboot.realstate_api.data.repositories.LocationRepository;
-import springboot.realstate_api.data.repositories.PropertyRepository;
-import springboot.realstate_api.data.repositories.TypeRepository;
-import springboot.realstate_api.web.dto.mapper;
-import springboot.realstate_api.web.dto.requestDto.PropertyRequestDto;
-import springboot.realstate_api.web.dto.responseDto.PropertyResponseDto;
+import springboot.realstate_api.web.dto.PropertyRequestDto;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
-public class PropertyService implements PropertyGateway {
+@AllArgsConstructor
+public class PropertyService {
+
+    private final PropertyGateway propertyGateway;
+    public List<Property> getProperties() {
+        return propertyGateway.getProperties();
+    }
+
+    public Property create(Property property) {
+        return propertyGateway.create(property);
+    }
+
+    public Property delete(String propertyId) {
+        return propertyGateway.delete(propertyId);
+    }
+
+    public Property update(PropertyRequestDto propertyRequestDto, String propertyId) {
+        return propertyGateway.update(propertyRequestDto, propertyId);
+    }
+
+    public Property updateTypeFromProperty(String typeId, String propertyId) {
+        return propertyGateway.updateTypeFromProperty(typeId, propertyId);
+    }
+
+    public Property updateLocationFromProperty(String locationId, String propertyId) {
+        return propertyGateway.updateLocationFromProperty(locationId, propertyId);
+    }
+
+    public Property addFeatureToProperty(String featureId, String propertyId) {
+        return propertyGateway.addFeatureToProperty(featureId, propertyId);
+    }
+
+    public Property deleteFeatureFromProperty(String featureId, String propertyId) {
+        return propertyGateway.deleteFeatureFromProperty(featureId, propertyId);
+    }
+
+    /*
 
     private final PropertyRepository propertyRepository;
     private final TypeRepository typeRepository;
@@ -39,7 +62,7 @@ public class PropertyService implements PropertyGateway {
 
     @Override
     public List<PropertyResponseDto> getProperties() {
-        List<Property> properties = propertyRepository.findAll();
+        List<PropertyEntity> properties = propertyRepository.findAll();
         return mapper.propertyToPropertyResponseDtos(properties);
     }
 
@@ -50,9 +73,9 @@ public class PropertyService implements PropertyGateway {
 
     @Override
     public PropertyResponseDto addProperty(PropertyRequestDto propertyRequestDto) {
-        Property property = new Property();
+        PropertyEntity property = new PropertyEntity();
         property.setId(UUID.randomUUID().toString());
-        Property property1 = Property.builder().id(UUID.randomUUID().toString()).build();
+        PropertyEntity property1 = PropertyEntity.builder().id(UUID.randomUUID().toString()).build();
         property.setTitle(propertyRequestDto.getTitle());
         property.setPrice(propertyRequestDto.getPrice());
         property.setDescription(propertyRequestDto.getDescription());
@@ -65,11 +88,11 @@ public class PropertyService implements PropertyGateway {
         property.setYear_built(propertyRequestDto.getYear_built());
         // Relation Data
         // [ pending ]
-        Type type = typeRepository.findById(propertyRequestDto.getPropertyTypeId()).get();
+        TypeEntity type = typeRepository.findById(propertyRequestDto.getPropertyTypeId()).get();
         if (type != null) {
             property.setType(type);
         }
-        Location location = locationRepository.findById(propertyRequestDto.getPropertyLocationId()).get();
+        LocationEntity location = locationRepository.findById(propertyRequestDto.getPropertyLocationId()).get();
         if (location != null) {
             property.setLocation(location);
         }
@@ -84,14 +107,14 @@ public class PropertyService implements PropertyGateway {
 
     @Override
     public PropertyResponseDto deleteProperty(String propertyId) {
-        Property property = getPropertyMethod(propertyId);
+        PropertyEntity property = getPropertyMethod(propertyId);
         propertyRepository.delete(property);
         return mapper.propertyToPropertyResponseDto(property);
     }
 
     @Override
     public PropertyResponseDto editProperty(PropertyRequestDto propertyRequestDto, String propertyId) {
-        Property propertyToEdit = getPropertyMethod(propertyId);
+        PropertyEntity propertyToEdit = getPropertyMethod(propertyId);
         //
 
         //
@@ -101,8 +124,8 @@ public class PropertyService implements PropertyGateway {
 
     @Override
     public PropertyResponseDto updateTypeFromProperty(String typeId, String propertyId) {
-        Property property = propertyRepository.findById(propertyId).get();
-        Type type = typeRepository.findById(typeId).get();
+        PropertyEntity property = propertyRepository.findById(propertyId).get();
+        TypeEntity type = typeRepository.findById(typeId).get();
         if (property != null && type != null ) {
             property.setType(null);
             property.setType(type);
@@ -114,8 +137,8 @@ public class PropertyService implements PropertyGateway {
 
     @Override
     public PropertyResponseDto updateLocationFromProperty(String locationId, String propertyId) {
-        Property property = propertyRepository.findById(propertyId).get();
-        Location location = locationRepository.findById(locationId).get();
+        PropertyEntity property = propertyRepository.findById(propertyId).get();
+        LocationEntity location = locationRepository.findById(locationId).get();
         if (property != null && location != null ) {
             property.setLocation(null);
             property.setLocation(location);
@@ -127,8 +150,8 @@ public class PropertyService implements PropertyGateway {
 
     @Override
     public PropertyResponseDto addFeatureToProperty(String featureId, String propertyId) {
-        Feature feature = featureRepository.findById(featureId).get();
-        Property property = propertyRepository.findById(propertyId).get();
+        FeatureEntity feature = featureRepository.findById(featureId).get();
+        PropertyEntity property = propertyRepository.findById(propertyId).get();
         if (feature != null && property != null) {
             property.getFeatures().add(feature);
             propertyRepository.save(property);
@@ -139,8 +162,8 @@ public class PropertyService implements PropertyGateway {
 
     @Override
     public PropertyResponseDto deleteFeatureFromProperty(String featureId, String propertyId) {
-        Feature feature = featureRepository.findById(featureId).get();
-        Property property = propertyRepository.findById(propertyId).get();
+        FeatureEntity feature = featureRepository.findById(featureId).get();
+        PropertyEntity property = propertyRepository.findById(propertyId).get();
         if (feature != null && property != null) {
             property.getFeatures().remove(feature);
             propertyRepository.save(property);
@@ -151,8 +174,9 @@ public class PropertyService implements PropertyGateway {
 
 
     // Service internal methods
-    public Property getPropertyMethod(String propertyId) {
+    public PropertyEntity getPropertyMethod(String propertyId) {
         return propertyRepository.findById(propertyId).orElseThrow(() ->
                 new IllegalArgumentException("Property not found: "+propertyId));
     }
+     */
 }

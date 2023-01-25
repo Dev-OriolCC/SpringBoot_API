@@ -6,9 +6,9 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import springboot.realstate_api.exceptions.FileStorageException;
-import springboot.realstate_api.exceptions.MyFileNotFoundException;
-import springboot.realstate_api.property.FileStorageProperties;
+import springboot.realstate_api.web.exceptions.FileStorageException;
+import springboot.realstate_api.web.exceptions.MyFileNotFoundException;
+import springboot.realstate_api.web.property.FileStorageProperties;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springboot.realstate_api.web.dto.requestDto.PropertyRequestDto;
-import springboot.realstate_api.web.dto.responseDto.PropertyResponseDto;
+import springboot.realstate_api.web.dto.PropertyRequestDto;
+import springboot.realstate_api.web.dto.PropertyResponseDto;
 import springboot.realstate_api.domain.properties.PropertyGateway;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("property")
+@RequestMapping("/property")
 public class PropertyController {
     private final PropertyGateway propertyService;
 
@@ -20,13 +20,13 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-    @GetMapping("/getProperties")
+    @GetMapping
     public ResponseEntity<List<PropertyResponseDto>> getProperties() {
         List<PropertyResponseDto> propertyResponseDtoList = propertyService.getProperties();
         return new ResponseEntity<>(propertyResponseDtoList, HttpStatus.OK);
     }
 
-    @PostMapping("postProperty")
+    @PostMapping
     public ResponseEntity<PropertyResponseDto> addProperty(@RequestBody final PropertyRequestDto propertyRequestDto) {
         PropertyResponseDto propertyResponseDto = propertyService.addProperty(propertyRequestDto);
         return new ResponseEntity<>(propertyResponseDto, HttpStatus.OK);
@@ -34,14 +34,14 @@ public class PropertyController {
     // Edit Property
     // ****
     //
-    @DeleteMapping("deleteProperty/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<PropertyResponseDto> deleteProperty(@PathVariable final String id) {
         PropertyResponseDto propertyResponseDto = propertyService.deleteProperty(id);
         return new ResponseEntity<>(propertyResponseDto, HttpStatus.OK);
     }
 
     // Relational Methods
-    @PutMapping("updatePropertyType/{typeId}/from/{propertyId}")
+    @PutMapping("/{typeId}/from/{propertyId}")
     public ResponseEntity<PropertyResponseDto> updateTypeFromProperty(@PathVariable final String typeId,
                                                                       @PathVariable final String propertyId) {
         PropertyResponseDto propertyResponseDto = propertyService.updateTypeFromProperty(typeId, propertyId);

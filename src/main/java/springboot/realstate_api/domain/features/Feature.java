@@ -10,6 +10,5 @@ import springboot.realstate_api.domain.base.BaseModel;
 @NoArgsConstructor
 @SuperBuilder
 public class Feature extends BaseModel {
-    private String id;
     private String name;
 }

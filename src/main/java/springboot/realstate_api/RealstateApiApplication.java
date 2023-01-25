@@ -3,10 +3,7 @@ package springboot.realstate_api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import springboot.realstate_api.property.FileStorageProperties;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springboot.realstate_api.web.property.FileStorageProperties;
 
 //@EnableJpaRepositories(basePackages = {"springboot.realstate_api.model", "springboot.realstate_api.repository"})
 //@EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")
@@ -21,10 +18,7 @@ public class RealstateApiApplication {
 	}
 
 	/* Notes to improve
-	* Create auth folder with logic
-	* Fix mappers
-	* Separate service logic
-	* fix relationships
+	* Pending to finish controllers
 	 */
 }
 

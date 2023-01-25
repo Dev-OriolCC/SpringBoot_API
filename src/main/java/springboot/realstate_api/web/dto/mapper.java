@@ -1,10 +1,7 @@
 package springboot.realstate_api.web.dto;
 
-import springboot.realstate_api.auth.entity.User;
+import springboot.realstate_api.data.entities.UserEntity;
 import springboot.realstate_api.data.entities.*;
-import springboot.realstate_api.web.dto.requestDto.*;
-import springboot.realstate_api.web.dto.responseDto.PropertyResponseDto;
-import springboot.realstate_api.web.dto.responseDto.UserResponseDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +13,7 @@ import java.util.List;
 
 public class mapper {
     // 1.- --- --- --- --- --- --- --- --- --- ---
-    public static PropertyResponseDto propertyToPropertyResponseDto(Property property) {
+    public static PropertyResponseDto propertyToPropertyResponseDto(PropertyEntity property) {
         PropertyResponseDto propertyResponseDto = new PropertyResponseDto();
         propertyResponseDto.setTitle(property.getTitle());
         propertyResponseDto.setPrice(property.getPrice());
@@ -47,15 +44,15 @@ public class mapper {
         //propertyResponseDto.setPhotos(property.getPhotos()); // Changed photosResponseDto_Photo
         return propertyResponseDto;
     }
-    public static List<PropertyResponseDto> propertyToPropertyResponseDtos(List<Property> properties) {
+    public static List<PropertyResponseDto> propertyToPropertyResponseDtos(List<PropertyEntity> properties) {
         List<PropertyResponseDto> propertyResponseDtos = new ArrayList<>();
-        for (Property property: properties) {
+        for (PropertyEntity property: properties) {
             propertyResponseDtos.add(propertyToPropertyResponseDto(property));
         }
         return propertyResponseDtos;
     }
     // 2.- --- --- --- --- --- --- --- --- --- ---
-    public static UserResponseDto userToUserResponseDto(User user) {
+    public static UserResponseDto userToUserResponseDto(UserEntity user) {
         UserResponseDto userResponseDto = new UserResponseDto();
         userResponseDto.setName(user.getName());
         userResponseDto.setLastname(user.getLastname());
@@ -79,22 +76,22 @@ public class mapper {
         //userResponseDto.setProperties(user.getProperties()); // [TEST] Changed Dto to Model
         return userResponseDto;
     }
-    public static List<UserResponseDto> userToUserResponseDtos(List<User> users) {
+    public static List<UserResponseDto> userToUserResponseDtos(List<UserEntity> users) {
         List<UserResponseDto> userResponseDtos = new ArrayList<>();
-        for (User user:  users) {
+        for (UserEntity user:  users) {
             userResponseDtos.add(userToUserResponseDto(user));
         }
         return userResponseDtos;
     }
 
     //  ===  Single items ===
-    public static TypeRequestDto typeToTypeRequestDto(Type type) {
-        TypeRequestDto typeRequestDto = new TypeRequestDto();
+    public static TypeDto typeToTypeRequestDto(TypeEntity type) {
+        TypeDto typeRequestDto = new TypeDto();
         typeRequestDto.setName(type.getName());
         return typeRequestDto;
     }
-    public static LocationRequestDto locationToLocationRequestDto(Location location) {
-        LocationRequestDto locationRequestDto = new LocationRequestDto();
+    public static LocationDto locationToLocationRequestDto(LocationEntity location) {
+        LocationDto locationRequestDto = new LocationDto();
         locationRequestDto.setCountry(location.getCountry());
         locationRequestDto.setState(location.getState());
         locationRequestDto.setCity(location.getCity());
@@ -103,34 +100,34 @@ public class mapper {
         locationRequestDto.setStreet(location.getStreet());
         return locationRequestDto;
     }
-    public static RoleRequestDto roleToRoleRequestDto(Role role) {
-        RoleRequestDto roleRequestDto =  new RoleRequestDto();
+    public static RoleDto roleToRoleRequestDto(RoleEntity role) {
+        RoleDto roleRequestDto =  new RoleDto();
         roleRequestDto.setName(role.getName());
         return roleRequestDto;
     }
     //
-    public static FeatureRequestDto featureToFeatureRequestDto(Feature feature) {
-        FeatureRequestDto featureRequestDto = new FeatureRequestDto();
+    public static FeatureDto featureToFeatureRequestDto(FeatureEntity feature) {
+        FeatureDto featureRequestDto = new FeatureDto();
         featureRequestDto.setName(feature.getName());
         return featureRequestDto;
     }
-    public static List<FeatureRequestDto> featureToFeatureRequestDtos(List<Feature> features) {
-        List<FeatureRequestDto> featureRequestDtos = new ArrayList<>();
-        for (Feature feature : features) {
+    public static List<FeatureDto> featureToFeatureRequestDtos(List<FeatureEntity> features) {
+        List<FeatureDto> featureRequestDtos = new ArrayList<>();
+        for (FeatureEntity feature : features) {
             featureRequestDtos.add(featureToFeatureRequestDto(feature));
         }
         return featureRequestDtos;
     }
     //
-    public static PhotoRequestDto photoToPhotoRequestDto(Photo photo) {
-        PhotoRequestDto photoRequestDto = new PhotoRequestDto();
+    public static PhotoDto photoToPhotoRequestDto(PhotoEntity photo) {
+        PhotoDto photoRequestDto = new PhotoDto();
         photoRequestDto.setUrl(photo.getUrl());
         photoRequestDto.setName(photo.getName());
         return photoRequestDto;
     }
-    public static List<PhotoRequestDto> photoToPhotoRequestDtos(List<Photo> photos) {
-        List<PhotoRequestDto> photoRequestDtos = new ArrayList<>();
-        for (Photo photo : photos) {
+    public static List<PhotoDto> photoToPhotoRequestDtos(List<PhotoEntity> photos) {
+        List<PhotoDto> photoRequestDtos = new ArrayList<>();
+        for (PhotoEntity photo : photos) {
             photoRequestDtos.add(photoToPhotoRequestDto(photo));
         }
         return photoRequestDtos;

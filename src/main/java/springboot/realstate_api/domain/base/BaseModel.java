@@ -14,9 +14,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @SuperBuilder
 public class BaseModel {
-
+    private String id;
     private LocalDateTime updatedAt;
     private LocalDateTime createdAt;
-    private boolean deleted = false;
+    private Boolean deleted = false;
 
 }

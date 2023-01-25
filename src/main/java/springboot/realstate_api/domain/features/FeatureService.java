@@ -1,12 +1,7 @@
 package springboot.realstate_api.domain.features;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import springboot.realstate_api.web.dto.mapper;
-import springboot.realstate_api.web.dto.requestDto.FeatureRequestDto;
-import springboot.realstate_api.data.entities.Feature;
-import springboot.realstate_api.data.repositories.FeatureRepository;
 
 import java.util.List;
 
@@ -14,9 +9,24 @@ import java.util.List;
 @AllArgsConstructor
 public class FeatureService {
 
-    private final FeatureRepository featureRepository;
     private final FeatureGateway featureGateway;
 
+    public List<Feature> getFeatures() {
+        return featureGateway.getFeatures();
+    }
+
+    public Feature create(Feature feature) {
+        return featureGateway.create(feature);
+    }
+
+    public Feature getFeature(String featureId) {
+        return featureGateway.getFeature(featureId);
+    }
+
+    public Feature delete(String featureId) {
+        return featureGateway.delete(featureId);
+    }
+ /*
     public List<FeatureRequestDto> getFeatures() {
         List<Feature> featureList = featureRepository.findAll();
         return mapper.featureToFeatureRequestDtos(featureList);
@@ -49,4 +59,5 @@ public class FeatureService {
         return featureRepository.findById(featureId).orElseThrow(() ->
                 new IllegalArgumentException("Course not found"+featureId));
     }
+  */
 }
