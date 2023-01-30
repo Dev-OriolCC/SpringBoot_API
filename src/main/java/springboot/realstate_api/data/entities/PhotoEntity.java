@@ -10,6 +10,8 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -43,6 +45,8 @@ public class PhotoEntity extends BaseEntity {
     private Long size;
 
     // Relationship
+    @ManyToMany(mappedBy = "photos")
+    private Set<PropertyEntity> properties = new HashSet<>();
 
 //    @NotNull
 //    @JsonIgnore

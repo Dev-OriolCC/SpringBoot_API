@@ -4,16 +4,21 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @SuperBuilder
 @MappedSuperclass
-public class BaseEntity {
+//@MappedSuperclass
+//@EntityListeners({AuditingEntityListener.class})
+public  class BaseEntity {
     // This is a test....
     @Id
     @Column(name = "id", length = 36, unique = true, nullable = false)

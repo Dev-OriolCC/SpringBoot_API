@@ -1,5 +1,6 @@
 package springboot.realstate_api.data.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import javax.validation.constraints.Size;
 @Setter
 @SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "locations")
 @SQLDelete(sql = "UPDATE locations SET deleted = true WHERE id = ?")
 @Where(clause = "deleted = false")

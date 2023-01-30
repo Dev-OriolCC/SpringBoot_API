@@ -60,12 +60,12 @@ public class PropertyEntity extends BaseEntity {
 //    private UserEntity userEntity;
 
     //TODO: USER
-    @OneToMany(cascade = {
+    @ManyToOne(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     }, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private UserEntity userEntity;
+    private UserEntity userEntity; //TODO: Changed modified OneToMany
 
     @Column(name = "user_id", nullable = false)
     private String userId;

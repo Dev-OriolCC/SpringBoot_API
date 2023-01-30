@@ -1,10 +1,13 @@
 package springboot.realstate_api.data.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,7 +16,11 @@ import java.util.Set;
 @Getter
 @Setter
 @SuperBuilder
+@AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "users")
+@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id = ?")
+@Where(clause = "deleted = false")
 public class UserEntity extends BaseEntity {
     private String name;
     private String lastName;
@@ -31,9 +38,11 @@ public class UserEntity extends BaseEntity {
 
 
     //TODO: Location
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, targetEntity = RoleEntity.class)
-    @JoinColumn(name = "location_id", referencedColumnName = "id", nullable = false)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, targetEntity = LocationEntity.class)
+    @JoinColumn(name = "location_id", referencedColumnName = "id", nullable = true)
     private LocationEntity location;
+
+
 
 //    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = RoleEntity.class)
 //    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = true)
