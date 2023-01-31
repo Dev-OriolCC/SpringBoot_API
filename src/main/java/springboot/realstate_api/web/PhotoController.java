@@ -73,7 +73,7 @@ public class PhotoController {
                 .size(photo.getSize())
                 .createdAt(photo.getCreatedAt())
                 .updatedAt(photo.getUpdatedAt())
-                .deleted(photo.getDeleted())
+                .deleted(photo.isDeleted())
                 .build();
     }
 

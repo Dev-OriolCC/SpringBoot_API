@@ -1,7 +1,6 @@
 package springboot.realstate_api.web.dto;
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -10,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 //@SuperBuilder
-public class TypeDto extends BaseDtoTwo {
+public class TypeDto extends BaseDto {
     @Builder
     public TypeDto(String id, LocalDateTime updatedAt, LocalDateTime createdAt, Boolean deleted, String name) {
         super(id, updatedAt, createdAt, deleted);

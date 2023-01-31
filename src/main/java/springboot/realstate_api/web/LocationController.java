@@ -50,7 +50,7 @@ public class LocationController {
                 .street(locationDto.getStreet())
                 .createdAt(locationDto.getCreatedAt())
                 .updatedAt(locationDto.getUpdatedAt())
-                .deleted(locationDto.getDeleted())
+                .deleted(locationDto.isDeleted())
                 .build();
     }
 
@@ -65,7 +65,7 @@ public class LocationController {
                 .street(location.getStreet())
                 .createdAt(location.getCreatedAt())
                 .updatedAt(location.getUpdatedAt())
-                .deleted(location.getDeleted())
+                .deleted(location.isDeleted())
                 .build();
     }
 

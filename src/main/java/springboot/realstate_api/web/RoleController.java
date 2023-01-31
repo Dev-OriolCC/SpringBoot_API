@@ -38,8 +38,8 @@ public class RoleController {
         return new ResponseEntity<>(toDto(roleService.getRole(id)), HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> delete(@PathVariable final String id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
         roleService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

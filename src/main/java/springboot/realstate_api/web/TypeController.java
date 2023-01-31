@@ -49,7 +49,7 @@ public class TypeController {
                 .name(typeDto.getName())
                 .createdAt(typeDto.getCreatedAt())
                 .updatedAt(typeDto.getUpdatedAt())
-                .deleted(typeDto.getDeleted())
+                .deleted(typeDto.isDeleted())
                 .build();
     }
 
@@ -59,7 +59,7 @@ public class TypeController {
                 .name(type.getName())
                 .createdAt(type.getCreatedAt())
                 .updatedAt(type.getUpdatedAt())
-                .deleted(type.getDeleted())
+                .deleted(type.isDeleted())
                 .build();
     }
 }

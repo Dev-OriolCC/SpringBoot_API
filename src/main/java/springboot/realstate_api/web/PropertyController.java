@@ -88,7 +88,7 @@ public class PropertyController {
                 .year_built(propertyRequestDto.getYear_built())
                 .createdAt(propertyRequestDto.getCreatedAt())
                 .updatedAt(propertyRequestDto.getUpdatedAt())
-                .deleted(propertyRequestDto.getDeleted())
+                .deleted(propertyRequestDto.isDeleted())
                 .build();
     }
 
@@ -107,7 +107,7 @@ public class PropertyController {
                 .year_built(property.getYear_built())
                 .createdAt(property.getCreatedAt())
                 .updatedAt(property.getUpdatedAt())
-                .deleted(property.getDeleted())
+                .deleted(property.isDeleted())
                 .build();
     }
 
@@ -126,7 +126,7 @@ public class PropertyController {
                 .year_built(property.getYear_built())
                 .createdAt(property.getCreatedAt())
                 .updatedAt(property.getUpdatedAt())
-                .deleted(property.getDeleted())
+                .deleted(property.isDeleted())
                 .build();
     }
 

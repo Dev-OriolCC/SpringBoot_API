@@ -46,7 +46,7 @@ public class FeatureController {
                 .name(featureRequestDto.getName())
                 .createdAt(featureRequestDto.getCreatedAt())
                 .updatedAt(featureRequestDto.getUpdatedAt())
-                .deleted(featureRequestDto.getDeleted())
+                .deleted(featureRequestDto.isDeleted())
                 .build();
     }
 
@@ -56,7 +56,7 @@ public class FeatureController {
                 .name(feature.getName())
                 .createdAt(feature.getCreatedAt())
                 .updatedAt(feature.getUpdatedAt())
-                .deleted(feature.getDeleted())
+                .deleted(feature.isDeleted())
                 .build();
     }
 

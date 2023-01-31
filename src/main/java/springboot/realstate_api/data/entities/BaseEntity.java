@@ -1,23 +1,26 @@
 package springboot.realstate_api.data.entities;
 
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
 @Getter
 @Setter
-@SuperBuilder
+//@SuperBuilder
 @MappedSuperclass
 //@MappedSuperclass
 //@EntityListeners({AuditingEntityListener.class})
+@AllArgsConstructor
+@NoArgsConstructor
 public  class BaseEntity {
     // This is a test....
     @Id
@@ -27,9 +30,9 @@ public  class BaseEntity {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @Column(name = "created_at", updatable = false, insertable = false)
+    @Column(name = "created_at", updatable = false, insertable = true) // changed to true...
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    private Boolean deleted = false;
+    private boolean deleted = false;
 }

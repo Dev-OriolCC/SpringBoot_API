@@ -51,7 +51,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter implemen
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/authenticate", "/swagger-ui/index.html#", "/users", "/roles", "/types")
+                .antMatchers("/authenticate", "/swagger-ui/index.html#", "/users", "/roles", "/types"
+                ,"/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

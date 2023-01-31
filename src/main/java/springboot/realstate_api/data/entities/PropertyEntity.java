@@ -1,9 +1,9 @@
 package springboot.realstate_api.data.entities;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.SQLDelete;
@@ -11,6 +11,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,6 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 @Table(name = "properties")
 @SQLDelete(sql = "UPDATE properties SET deleted = true WHERE id = ?")
@@ -30,6 +30,26 @@ public class PropertyEntity extends BaseEntity {
      * @LocalDateTime updatedAt
      * @Boolean deleted
      */
+    @Builder
+    public PropertyEntity(String id, LocalDateTime updatedAt, LocalDateTime createdAt, boolean deleted, String title, Float price, String description, String details, Integer squarefeet, Integer baths, Integer beds, Character state, LocalDate date_published, Integer year_built, LocationEntity location, TypeEntity type, UserEntity userEntity, String userId, Set<FeatureEntity> features, Set<PhotoEntity> photos) {
+        super(id, updatedAt, createdAt, deleted);
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.details = details;
+        this.squarefeet = squarefeet;
+        this.baths = baths;
+        this.beds = beds;
+        this.state = state;
+        this.date_published = date_published;
+        this.year_built = year_built;
+        this.location = location;
+        this.type = type;
+        this.userEntity = userEntity;
+        this.userId = userId;
+        this.features = features;
+        this.photos = photos;
+    }
 
     private String title;
     private Float price;

@@ -1,23 +1,26 @@
 package springboot.realstate_api.domain.roles;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
+import springboot.realstate_api.domain.base.BaseModel;
+
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
-public class Role {
-    private String id;
-    private LocalDateTime updatedAt;
-    private LocalDateTime createdAt;
-    private boolean deleted = false;
+//@SuperBuilder
+public class Role extends BaseModel {
+
+    @Builder
+    public Role(String id, LocalDateTime updatedAt, LocalDateTime createdAt, Boolean deleted, String name) {
+        super(id, updatedAt, createdAt, deleted);
+        this.name = name;
+    }
+
     private String name;
 
+    //TODO: Making test of inheritance with ROLE....
+    // Testing is pending
 
 }

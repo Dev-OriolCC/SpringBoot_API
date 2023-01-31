@@ -1,27 +1,42 @@
 package springboot.realstate_api.data.entities;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @Setter
-@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
 @SQLDelete(sql = "UPDATE users SET deleted = true WHERE id = ?")
 @Where(clause = "deleted = false")
 public class UserEntity extends BaseEntity {
+
+    /*
+     * @String id
+     * @LocalDateTime createdAt
+     * @LocalDateTime updatedAt
+     * @Boolean deleted
+     */
+
+    @Builder
+    public UserEntity(String id, LocalDateTime updatedAt, LocalDateTime createdAt, boolean deleted, String name, String lastName, String email, String password, String contact_email, String twitter, Long mobile, RoleEntity role, LocationEntity location) {
+        super(id, updatedAt, createdAt, deleted);
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.contact_email = contact_email;
+        this.twitter = twitter;
+        this.mobile = mobile;
+        this.role = role;
+        this.location = location;
+    }
+
     private String name;
     private String lastName;
     private String email;
