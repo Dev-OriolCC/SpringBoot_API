@@ -1,6 +1,7 @@
 package springboot.realstate_api.web;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,8 @@ public class UserController {
 
     private final UserGateway userService;
 
+    RoleController roleController;
+
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> getUsers() {
         List<UserResponseDto> userResponseDtoList = userService.getUsers().stream().map(this::toDto).collect(toList());
@@ -28,7 +31,8 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponseDto> addUser(@RequestBody final UserRequestDto userRequestDto) {
+    public ResponseEntity<UserResponseDto> create(@RequestBody final UserRequestDto userRequestDto) {
+        //userRequestDto.getRoleId();
         // UserResponseDto userResponseDto = userService.create(toModel(userRequestDto));
         return new ResponseEntity<>(toDto(userService.create(toModel(userRequestDto))), HttpStatus.OK);
     }
@@ -37,7 +41,7 @@ public class UserController {
     //
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UserResponseDto> deleteUser(@PathVariable final String id) {
+    public ResponseEntity<UserResponseDto> delete(@PathVariable final String id) {
         // UserResponseDto userResponseDto = userService.delete(id);
         return new ResponseEntity<>(toDto(userService.delete(id)), HttpStatus.OK);
     }
@@ -68,6 +72,10 @@ public class UserController {
                 .contact_email(user.getContact_email())
                 .twitter(user.getTwitter())
                 .mobile(user.getMobile())
+                //
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
+                .deleted(user.isDeleted())
                 .build();
     }
 
@@ -80,6 +88,10 @@ public class UserController {
                 .contact_email(user.getContact_email())
                 .twitter(user.getTwitter())
                 .mobile(user.getMobile())
+                .roleId(user.getRoleId())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
+                .deleted(user.isDeleted())
                 .build();
     }
 
@@ -92,6 +104,11 @@ public class UserController {
                 .contact_email(user.getContact_email())
                 .twitter(user.getTwitter())
                 .mobile(user.getMobile())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
+                .deleted(user.isDeleted())
+                // Relationship
+                .role(roleController.toDto(user.getRole()))
                 .build();
     }
 

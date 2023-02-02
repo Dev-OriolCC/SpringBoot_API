@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -33,9 +34,7 @@ public class RoleEntity extends BaseEntity {
         super(id, updatedAt, createdAt, deleted);
         this.name = name;
     }
-
-    @Size(min = 5, message = "Name must be greater than 5 characters.")
-    @Size(max = 10, message = "Name must be smaller than 10 characters.")
+    @Column(unique = true)
     private String name;
 
 }

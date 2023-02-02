@@ -7,6 +7,7 @@ import springboot.realstate_api.data.entities.FeatureEntity;
 import springboot.realstate_api.data.entities.RoleEntity;
 import springboot.realstate_api.data.entities.UserEntity;
 import springboot.realstate_api.data.repositories.RoleRepository;
+import springboot.realstate_api.data.repositories.UserRepository;
 import springboot.realstate_api.domain.features.Feature;
 import springboot.realstate_api.domain.roles.Role;
 import springboot.realstate_api.domain.roles.RoleGateway;
@@ -22,6 +23,7 @@ import static java.util.stream.Collectors.toList;
 public class DefaultRoleGateway implements RoleGateway {
 
     private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
     @Override
     public List<Role> getRoles() {
         return roleRepository.findAll().stream().map(this::toModel).collect(toList());
@@ -30,11 +32,14 @@ public class DefaultRoleGateway implements RoleGateway {
     @Override
     public Role create(Role role) {
         role.setId(UUID.randomUUID().toString());
+        roleRepository.count();
         return toModel(roleRepository.save(toEntity(role)));
     }
 
     @Override
     public Role getRole(String roleId) {
+        Integer total = userRepository.countUserEntitiesByRole(roleRepository.getById(roleId));
+        System.out.println(total); // TODO: FINISH
         return toModel(roleRepository.getById(roleId));
     }
 
@@ -46,7 +51,13 @@ public class DefaultRoleGateway implements RoleGateway {
         return toModel(roleEntity);
     }
 
-    private Role toModel(RoleEntity roleEntity) {
+    protected RoleEntity createAdminRole() {
+        RoleEntity roleEntity = new RoleEntity("ADMIN");
+        roleEntity.setId(UUID.randomUUID().toString());
+        return roleRepository.save(roleEntity);
+    }
+
+    protected Role toModel(RoleEntity roleEntity) {
         return Role.builder()
                 .id(roleEntity.getId())
                 .name(roleEntity.getName())
@@ -56,10 +67,10 @@ public class DefaultRoleGateway implements RoleGateway {
                 .build();
     }
 
-    private RoleEntity toEntity(Role role) {
+    protected RoleEntity toEntity(Role role) {
         return RoleEntity.builder()
                 .id(role.getId())
-                .name(role.getName())
+                .name(role.getName().toUpperCase())
                 .createdAt(role.getCreatedAt())
                 .updatedAt(role.getUpdatedAt())
                 .deleted(role.isDeleted())

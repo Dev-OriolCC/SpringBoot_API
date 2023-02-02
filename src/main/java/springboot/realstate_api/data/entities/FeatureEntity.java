@@ -31,8 +31,6 @@ public class FeatureEntity extends BaseEntity {
         this.name = name;
     }
 
-    @NotNull
-    @Size(min = 4, message = "Name must at least be greater than 4 characters")
     private String name;
     //TODO: Make relationships
     // Working apparently, waiting for testing results...

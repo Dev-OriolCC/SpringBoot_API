@@ -47,7 +47,7 @@ public class DefaultTypeGateway implements TypeGateway {
                 .name(typeEntity.getName())
                 .createdAt(typeEntity.getCreatedAt())
                 .updatedAt(typeEntity.getUpdatedAt())
-                .deleted(typeEntity.getDeleted())
+                .deleted(typeEntity.isDeleted())
                 .build();
     }
 
@@ -57,7 +57,7 @@ public class DefaultTypeGateway implements TypeGateway {
                 .name(type.getName())
                 .createdAt(type.getCreatedAt())
                 .updatedAt(type.getUpdatedAt())
-                .deleted(type.getDeleted())
+                .deleted(type.isDeleted())
                 .build();
     }
 

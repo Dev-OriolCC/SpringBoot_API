@@ -4,6 +4,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Getter
@@ -22,11 +26,25 @@ public class LocationDto extends BaseDto {
         this.avenue = avenue;
     }
 
+    @NotNull
+    @Size(min = 4, message = "Country must be at least 4 characters")
     private String country;
+    @NotNull
+    @Size(min = 4, message = "State must be at least 4 characters")
     private String state;
+
+    @NotNull
+    @Size(min = 4, message = "City must be at least 4 characters")
     private String city;
+
+    @NotNull
+    @Min(1000)
+    @Max(10000000)
     private Integer zipcode;
+
+    @Size(min = 4, message = "Street must be at least 4 characters")
     private String street;
+    @Size(min = 4, message = "Street must be at least 4 characters")
     private String avenue;
 
 

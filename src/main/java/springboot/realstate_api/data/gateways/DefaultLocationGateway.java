@@ -50,7 +50,7 @@ public class DefaultLocationGateway implements LocationGateway {
                 .zipcode(locationEntity.getZipcode())
                 .createdAt(locationEntity.getCreatedAt())
                 .updatedAt(locationEntity.getUpdatedAt())
-                .deleted(locationEntity.getDeleted())
+                .deleted(locationEntity.isDeleted())
                 .build();
     }
 
@@ -66,7 +66,7 @@ public class DefaultLocationGateway implements LocationGateway {
                 .zipcode(location.getZipcode())
                 .createdAt(location.getCreatedAt())
                 .updatedAt(location.getUpdatedAt())
-                .deleted(location.getDeleted())
+                .deleted(location.isDeleted())
                 .build();
     }
 

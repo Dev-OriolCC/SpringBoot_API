@@ -34,7 +34,7 @@ public class PropertyRequestDto extends BaseDto {
     }
 
     @NotNull
-    @Size(min = 4, message = "Name must at least be greater than 4 characters")
+    @Size(min = 4, message = "Title must be at least 4 characters")
     private String title;
 
     @NotNull
@@ -43,7 +43,7 @@ public class PropertyRequestDto extends BaseDto {
     private Float price;
 
     @NotNull
-    @Size(min = 10, message = "Description must at least be greater than 10 characters")
+    @Size(min = 10, message = "Description must be at least 10 characters")
     private String description;
 
 

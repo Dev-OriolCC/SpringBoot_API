@@ -46,7 +46,7 @@ public class DefaultPhotoGateway implements PhotoGateway {
                 .fileType(photoEntity.getFileType())
                 .createdAt(photoEntity.getCreatedAt())
                 .updatedAt(photoEntity.getUpdatedAt())
-                .deleted(photoEntity.getDeleted())
+                .deleted(photoEntity.isDeleted())
                 .build();
     }
 
@@ -59,7 +59,7 @@ public class DefaultPhotoGateway implements PhotoGateway {
                 .fileType(photo.getFileType())
                 .createdAt(photo.getCreatedAt())
                 .updatedAt(photo.getUpdatedAt())
-                .deleted(photo.getDeleted())
+                .deleted(photo.isDeleted())
                 .build();
     }
 

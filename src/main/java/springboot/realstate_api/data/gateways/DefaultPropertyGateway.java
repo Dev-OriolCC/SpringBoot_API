@@ -76,7 +76,7 @@ public class DefaultPropertyGateway implements PropertyGateway {
                 .year_built(propertyEntity.getYear_built())
                 .createdAt(propertyEntity.getCreatedAt())
                 .updatedAt(propertyEntity.getUpdatedAt())
-                .deleted(propertyEntity.getDeleted())
+                .deleted(propertyEntity.isDeleted())
                 .build();
     }
 
@@ -95,7 +95,7 @@ public class DefaultPropertyGateway implements PropertyGateway {
                 .year_built(property.getYear_built())
                 .createdAt(property.getCreatedAt())
                 .updatedAt(property.getUpdatedAt())
-                .deleted(property.getDeleted())
+                .deleted(property.isDeleted())
                 .location(new LocationEntity())
                 .build();
     }

@@ -43,14 +43,10 @@ public class PhotoEntity extends BaseEntity {
 //    @Size(min = 4, message = "URL must at least be greater than 4 characters")
     private String url;
 
-    @NotNull
-    @Size(min = 4, message = "ALT must at least be greater than 4 characters")
     private String name;
 
-    @NotNull
     private String fileType;
 
-    @NotNull
     private Long size;
 
     // Relationship

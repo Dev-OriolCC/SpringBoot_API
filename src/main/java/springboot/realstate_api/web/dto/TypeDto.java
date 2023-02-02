@@ -17,7 +17,7 @@ public class TypeDto extends BaseDto {
     }
 
     @NotNull
-    @Size(min = 4, message = "Name must at least be greater than 4 characters")
+    @Size(min = 4, message = "Name must be at least 4 characters")
     private String name;
 
 }

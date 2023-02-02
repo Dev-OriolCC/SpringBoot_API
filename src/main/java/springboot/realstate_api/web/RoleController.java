@@ -33,7 +33,7 @@ public class RoleController {
         return new ResponseEntity<>(toDto(roleService.create(toModel(roleDto))), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{roleId}")
+    @GetMapping("/{id}")
     public ResponseEntity<RoleDto> getRole(@PathVariable String id) {
         return new ResponseEntity<>(toDto(roleService.getRole(id)), HttpStatus.OK);
     }

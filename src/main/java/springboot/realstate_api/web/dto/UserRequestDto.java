@@ -29,28 +29,28 @@ public class UserRequestDto extends BaseDto {
     }
 
     @NotNull
-    @Size(min = 3, message = "Name must at least be greater than 3 characters")
+    @Size(min = 3, message = "Name must be at least 3 characters")
     private String name;
 
     @NotNull
-    @Size(min = 3, message = "Lastname must at least be greater than 3 characters")
+    @Size(min = 2, message = "Lastname must be at least 2 characters")
     private String lastname;
 
     @NotNull
-    @Size(min = 8, message = "Email must at least be greater than 8 characters")
-    @Email
+    @Size(min = 8, message = "Email must be at least 8 characters")
+    @Email(message = "Enter a valid email.")
     private String email;
 
     @NotNull
-    @Size(min = 12, message = "Password must at least be greater than 12 characters")
+    @Size(min = 12, message = "Password must be at least 12 characters")
     private String password;
 
     @NotNull
-    @Size(min = 8, message = "Contact Email must at least be greater than 8 characters")
-    @Email
+    @Size(min = 8, message = "Contact Email must be at least 8 characters")
+    @Email(message = "Enter a valid email.")
     private String contact_email;
 
-    @Size(min = 5, message = "Twitter @Username must at least be greater than 5 characters")
+    @Size(min = 5, message = "Twitter @Username must be at least 5 characters")
     private String twitter;
 
     @Min(100000000) // Maybe change for 1_000_000_000

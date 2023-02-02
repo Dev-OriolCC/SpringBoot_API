@@ -48,7 +48,7 @@ public class UserEntity extends BaseEntity {
     // Relationship
     //TODO: Role
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE, targetEntity = RoleEntity.class)
-    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = true) // false
     private RoleEntity role;
 
 

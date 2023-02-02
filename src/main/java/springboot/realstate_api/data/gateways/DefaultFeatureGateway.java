@@ -47,7 +47,7 @@ public class DefaultFeatureGateway implements FeatureGateway {
                 .name(featureEntity.getName())
                 .createdAt(featureEntity.getCreatedAt())
                 .updatedAt(featureEntity.getUpdatedAt())
-                .deleted(featureEntity.getDeleted())
+                .deleted(featureEntity.isDeleted())
                 .build();
     }
 
@@ -57,7 +57,7 @@ public class DefaultFeatureGateway implements FeatureGateway {
                 .name(feature.getName())
                 .createdAt(feature.getCreatedAt())
                 .updatedAt(feature.getUpdatedAt())
-                .deleted(feature.getDeleted())
+                .deleted(feature.isDeleted())
                 .build();
     }
 

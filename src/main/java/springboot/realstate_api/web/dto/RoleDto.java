@@ -17,7 +17,8 @@ public class RoleDto extends BaseDto {
     }
 
     @NotNull
-    @Size(min = 4, message = "Name must at least be greater than 4 characters")
+    @Size(min = 5, message = "Name must be at least 5 characters.")
+    @Size(max = 10, message = "Name must be smaller than 10 characters.")
     private String name;
 
 }

@@ -5,11 +5,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springboot.realstate_api.domain.roles.Role;
 import springboot.realstate_api.domain.types.Type;
-import springboot.realstate_api.domain.types.TypeGateway;
 import springboot.realstate_api.domain.types.TypeService;
-import springboot.realstate_api.web.dto.RoleDto;
 import springboot.realstate_api.web.dto.TypeDto;
 
 import javax.validation.Valid;
@@ -35,12 +32,15 @@ public class TypeController {
         return new ResponseEntity<>(toDto(typeService.create(toModel(typeDto))), HttpStatus.CREATED);
     }
 
-    public Type getType(String typeId) {
-        return null;
+    @GetMapping("/{id}")
+    public ResponseEntity<TypeDto> getType(@PathVariable String id) {
+        return new ResponseEntity<>(toDto(typeService.getType(id)), HttpStatus.OK);
     }
 
-    public Type delete(String typeId) {
-        return null;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        typeService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     public Type toModel(TypeDto typeDto) {

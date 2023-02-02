@@ -2,6 +2,7 @@ package springboot.realstate_api.domain.users;
 
 import lombok.*;
 import springboot.realstate_api.domain.base.BaseModel;
+import springboot.realstate_api.domain.roles.Role;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +13,8 @@ import java.time.LocalDateTime;
 public class User extends BaseModel {
 
     @Builder
-    public User(String id, LocalDateTime updatedAt, LocalDateTime createdAt, boolean deleted, String name, String lastName, String email, String password, String contact_email, String twitter, Long mobile) {
+    public User(String id, LocalDateTime updatedAt, LocalDateTime createdAt, boolean deleted, String name, String lastName, String email, String password,
+                String contact_email, String twitter, Long mobile, String roleId, Role role) {
         super(id, updatedAt, createdAt, deleted);
         this.name = name;
         this.lastName = lastName;
@@ -21,6 +23,7 @@ public class User extends BaseModel {
         this.contact_email = contact_email;
         this.twitter = twitter;
         this.mobile = mobile;
+        this.role = role; // test
     }
 
     private String name;
@@ -32,4 +35,6 @@ public class User extends BaseModel {
     private Long mobile;
 
     // Relationships...
+    private String roleId;
+    private Role role;
 }
