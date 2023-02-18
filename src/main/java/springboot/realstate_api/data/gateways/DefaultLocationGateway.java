@@ -7,6 +7,8 @@ import springboot.realstate_api.data.repositories.LocationRepository;
 import springboot.realstate_api.domain.locations.Location;
 import springboot.realstate_api.domain.locations.LocationGateway;
 import java.util.List;
+import java.util.UUID;
+
 import static java.util.stream.Collectors.toList;
 
 @Component
@@ -23,6 +25,7 @@ public class DefaultLocationGateway implements LocationGateway {
 
     @Override
     public Location create(Location location) {
+        location.setId(UUID.randomUUID().toString());
         return toModel(locationRepository.save(toEntity(location)));
     }
 

@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 //@SuperBuilder
 public class TypeDto extends BaseDto {
     @Builder
-    public TypeDto(String id, LocalDateTime updatedAt, LocalDateTime createdAt, Boolean deleted, String name) {
+    public TypeDto(String id, LocalDateTime updatedAt, LocalDateTime createdAt, boolean deleted, String name) {
         super(id, updatedAt, createdAt, deleted);
         this.name = name;
     }
