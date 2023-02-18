@@ -4,11 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import springboot.realstate_api.data.entities.LocationEntity;
 import springboot.realstate_api.data.entities.PropertyEntity;
+import springboot.realstate_api.data.entities.TypeEntity;
+import springboot.realstate_api.data.entities.UserEntity;
 import springboot.realstate_api.data.repositories.PropertyRepository;
+import springboot.realstate_api.data.repositories.TypeRepository;
+import springboot.realstate_api.data.repositories.UserRepository;
 import springboot.realstate_api.domain.properties.Property;
 import springboot.realstate_api.domain.properties.PropertyGateway;
 import springboot.realstate_api.web.dto.PropertyRequestDto;
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -16,7 +21,11 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class DefaultPropertyGateway implements PropertyGateway {
 
+    private final DefaultTypeGateway defaultTypeGateway;
+    private final DefaultUserGateway defaultUserGateway;
     private final PropertyRepository propertyRepository;
+    private final UserRepository userRepository;
+    private final TypeRepository typeRepository;
 
     @Override
     public List<Property> getProperties() {
@@ -26,8 +35,23 @@ public class DefaultPropertyGateway implements PropertyGateway {
 
     @Override
     public Property create(Property property) {
+
+        UserEntity userEntity = userRepository.findById(property.getUser().getId()).orElseThrow(() -> new RuntimeException("USER NOT FOUND"));
+        property.setUser(defaultUserGateway.toModel(userEntity));
+        // Check if user has a location to use as default...
+        LocationEntity locationEntity = userEntity.getLocation();
+
+        // Check if location is provided
+        addTypeAutomatic(property);
+        // Else = add default location (HOME)
+        // LocationEntity locationEntity
+
+        // Else = create it if does not exits...
+
         return toModel(propertyRepository.save(toEntity(property)));
     }
+
+
 
     @Override
     public Property delete(String propertyId) {
@@ -43,11 +67,15 @@ public class DefaultPropertyGateway implements PropertyGateway {
 
     @Override
     public Property updateTypeFromProperty(String typeId, String propertyId) {
-        return null;
+        PropertyEntity propertyEntity = propertyRepository.findById(propertyId).orElseThrow(() -> new RuntimeException("Error"));
+        TypeEntity typeEntity = typeRepository.findById(typeId).orElseThrow(() -> new RuntimeException("Error"));
+        propertyEntity.setType(typeEntity);
+        return toModel(propertyEntity);
     }
 
     @Override
     public Property updateLocationFromProperty(String locationId, String propertyId) {
+
         return null;
     }
 
@@ -61,7 +89,16 @@ public class DefaultPropertyGateway implements PropertyGateway {
         return null;
     }
 
-    private Property toModel(PropertyEntity propertyEntity) {
+
+    // Protected methods
+    protected void addTypeAutomatic(Property property) {
+        Optional<TypeEntity> typeEntity;
+
+        //if (property.getType)
+    }
+
+
+    protected Property toModel(PropertyEntity propertyEntity) {
         return Property.builder()
                 .id(propertyEntity.getId())
                 .title(propertyEntity.getTitle())
@@ -74,13 +111,16 @@ public class DefaultPropertyGateway implements PropertyGateway {
                 .state(propertyEntity.getState())
                 .date_published(propertyEntity.getDate_published())
                 .year_built(propertyEntity.getYear_built())
+                // Relationship
+                .type(defaultTypeGateway.toModel(propertyEntity.getType()))
+                //
                 .createdAt(propertyEntity.getCreatedAt())
                 .updatedAt(propertyEntity.getUpdatedAt())
                 .deleted(propertyEntity.isDeleted())
                 .build();
     }
 
-    private PropertyEntity toEntity(Property property) {
+    protected PropertyEntity toEntity(Property property) {
         return PropertyEntity.builder()
                 .id(property.getId())
                 .title(property.getTitle())

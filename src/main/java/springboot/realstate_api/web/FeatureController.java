@@ -35,8 +35,9 @@ public class FeatureController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<FeatureDto> delete(@PathVariable final String id) {
-        return new ResponseEntity<>(toDto(featureService.delete(id)), HttpStatus.OK);
+    public ResponseEntity<Void> delete(@PathVariable final String id) {
+        featureService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // Pending to FINISH

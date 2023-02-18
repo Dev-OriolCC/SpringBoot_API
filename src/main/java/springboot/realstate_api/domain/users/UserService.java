@@ -34,6 +34,10 @@ public class UserService {
         return userGateway.addLocationToUser(locationId, userId);
     }
 
+    public User findUserByEmail(String email) {
+        return userGateway.findByEmail(email);
+    }
+
 
     //test
     /*

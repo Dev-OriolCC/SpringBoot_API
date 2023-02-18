@@ -12,4 +12,6 @@ public interface UserGateway {
     // Relational Data
     User addRoleToUser(String roleId, String userId);
     User addLocationToUser(String locationId, String userId);
+
+    User findByEmail(String email);
 }

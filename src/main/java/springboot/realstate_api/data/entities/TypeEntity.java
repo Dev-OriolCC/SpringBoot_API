@@ -27,6 +27,10 @@ public class TypeEntity extends BaseEntity {
      * @Boolean deleted
      */
 
+    public TypeEntity(String name) {
+        this.name = name;
+    }
+
     @Builder
     public TypeEntity(String id, LocalDateTime updatedAt, LocalDateTime createdAt, boolean deleted, String name) {
         super(id, updatedAt, createdAt, deleted);

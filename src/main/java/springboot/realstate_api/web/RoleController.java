@@ -49,6 +49,7 @@ public class RoleController {
         return Role.builder()
                 .id(roleDto.getId())
                 .name(roleDto.getName())
+                .users(roleDto.getUsers()) // test
                 .createdAt(roleDto.getCreatedAt())
                 .updatedAt(roleDto.getUpdatedAt())
                 .deleted(roleDto.isDeleted())
@@ -59,6 +60,7 @@ public class RoleController {
         return RoleDto.builder()
                 .id(role.getId())
                 .name(role.getName())
+                .users(role.getUsers()) // test
                 .createdAt(role.getCreatedAt())
                 .updatedAt(role.getUpdatedAt())
                 .deleted(role.isDeleted())

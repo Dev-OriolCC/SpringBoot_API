@@ -2,16 +2,12 @@ package springboot.realstate_api.data.gateways;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
-import springboot.realstate_api.data.entities.RoleEntity;
 import springboot.realstate_api.data.entities.TypeEntity;
 import springboot.realstate_api.data.repositories.TypeRepository;
-import springboot.realstate_api.domain.roles.Role;
 import springboot.realstate_api.domain.types.Type;
 import springboot.realstate_api.domain.types.TypeGateway;
-
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -33,15 +29,26 @@ public class DefaultTypeGateway implements TypeGateway {
 
     @Override
     public Type getType(String typeId) {
-        return null;
+        TypeEntity typeEntity = typeRepository.findById(typeId).orElseThrow(() -> new RuntimeException("Error"));
+        return toModel(typeEntity);
     }
 
     @Override
     public Type delete(String typeId) {
-        return null;
+        TypeEntity typeEntity = typeRepository.findById(typeId).orElseThrow(() -> new RuntimeException("Error"));
+        typeRepository.delete(typeEntity);
+        return toModel(typeEntity);
     }
 
-    private Type toModel(TypeEntity typeEntity) {
+
+    // Protected methods
+    protected TypeEntity createDefaultType() {
+        TypeEntity typeEntity = new TypeEntity("House");
+        typeEntity.setId(UUID.randomUUID().toString());
+        return typeRepository.save(typeEntity);
+    }
+
+    protected Type toModel(TypeEntity typeEntity) {
         return Type.builder()
                 .id(typeEntity.getId())
                 .name(typeEntity.getName())
@@ -51,7 +58,7 @@ public class DefaultTypeGateway implements TypeGateway {
                 .build();
     }
 
-    private TypeEntity toEntity(Type type) {
+    protected TypeEntity toEntity(Type type) {
         return TypeEntity.builder()
                 .id(type.getId())
                 .name(type.getName())

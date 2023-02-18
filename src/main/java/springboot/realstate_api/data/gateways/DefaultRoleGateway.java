@@ -1,17 +1,12 @@
 package springboot.realstate_api.data.gateways;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import springboot.realstate_api.data.entities.FeatureEntity;
 import springboot.realstate_api.data.entities.RoleEntity;
-import springboot.realstate_api.data.entities.UserEntity;
 import springboot.realstate_api.data.repositories.RoleRepository;
 import springboot.realstate_api.data.repositories.UserRepository;
-import springboot.realstate_api.domain.features.Feature;
 import springboot.realstate_api.domain.roles.Role;
 import springboot.realstate_api.domain.roles.RoleGateway;
-import springboot.realstate_api.domain.users.User;
 
 import java.util.List;
 import java.util.UUID;
@@ -46,7 +41,6 @@ public class DefaultRoleGateway implements RoleGateway {
     @Override
     public Role delete(String roleId) {
         RoleEntity roleEntity = roleRepository.findById(roleId).orElseThrow(() -> new RuntimeException("Error"));
-
         roleRepository.delete(roleEntity);
         return toModel(roleEntity);
     }
@@ -61,6 +55,7 @@ public class DefaultRoleGateway implements RoleGateway {
         return Role.builder()
                 .id(roleEntity.getId())
                 .name(roleEntity.getName())
+                .users(userRepository.countUserEntitiesByRole(roleRepository.getById(roleEntity.getId())))
                 .createdAt(roleEntity.getCreatedAt())
                 .updatedAt(roleEntity.getUpdatedAt())
                 .deleted(roleEntity.isDeleted())

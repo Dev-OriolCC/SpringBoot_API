@@ -1,13 +1,20 @@
 package springboot.realstate_api.web;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import springboot.realstate_api.domain.properties.Property;
+import springboot.realstate_api.domain.users.User;
+import springboot.realstate_api.domain.users.UserService;
+import springboot.realstate_api.domain.users.UserServiceAuth;
 import springboot.realstate_api.web.dto.PropertyRequestDto;
 import springboot.realstate_api.web.dto.PropertyResponseDto;
 import springboot.realstate_api.domain.properties.PropertyGateway;
+import springboot.realstate_api.web.dto.UserRequestDto;
+import springboot.realstate_api.web.security.JWTUtility;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,12 +23,25 @@ import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping("/property")
+@AllArgsConstructor
 public class PropertyController {
     private final PropertyGateway propertyService;
-
+    UserService userService;
+    JWTUtility jwtUtility;
     @Autowired
     public PropertyController(PropertyGateway propertyService) {
         this.propertyService = propertyService;
+    }
+
+    //TODO: Refactor all endpoints to have an userID as path variable..
+    @GetMapping("/me")
+    public ResponseEntity<Void> getAuthUserExample(@RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+
+//        String email = jwtUtil.getUsernameFromToken(token);
+//        UserRegisteredDTO userAuthenticated = toDTO(service.findByEmail(email));
+        //jwtUtility.getUsernameFromToken(token);
+
+        return null;
     }
 
     @GetMapping
@@ -31,7 +51,13 @@ public class PropertyController {
     }
 
     @PostMapping
-    public ResponseEntity<PropertyResponseDto> addProperty(@RequestBody final PropertyRequestDto propertyRequestDto) {
+    public ResponseEntity<PropertyResponseDto> create(
+            @RequestBody final PropertyRequestDto propertyRequestDto,
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
+
+        String email = jwtUtility.getUsernameFromToken(token);
+        User user = userService.findUserByEmail(email);
+        propertyRequestDto.setPropertyUserId(user.getId()); // Id assigned from token user.
         //PropertyResponseDto propertyResponseDto = propertyService.create(propertyRequestDto);
         return new ResponseEntity<>(toDto2(propertyService.create(toModel(propertyRequestDto))), HttpStatus.OK);
     }
@@ -39,9 +65,10 @@ public class PropertyController {
     // ****
     //
     @DeleteMapping("/{id}")
-    public ResponseEntity<PropertyResponseDto> deleteProperty(@PathVariable final String id) {
+    public ResponseEntity<Void> delete(@PathVariable final String id) {
         //PropertyResponseDto propertyResponseDto = propertyService.deleteProperty(id);
-        return new ResponseEntity<>(toDto2(propertyService.delete(id)), HttpStatus.OK);
+        propertyService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     // Relational Methods
@@ -86,6 +113,8 @@ public class PropertyController {
                 .state(propertyRequestDto.getState())
                 .date_published(propertyRequestDto.getDate_published())
                 .year_built(propertyRequestDto.getYear_built())
+                // Relationship
+//                .user(propertyRequestDto.get)
                 .createdAt(propertyRequestDto.getCreatedAt())
                 .updatedAt(propertyRequestDto.getUpdatedAt())
                 .deleted(propertyRequestDto.isDeleted())

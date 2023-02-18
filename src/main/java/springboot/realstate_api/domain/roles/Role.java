@@ -13,12 +13,15 @@ import java.time.LocalDateTime;
 public class Role extends BaseModel {
 
     @Builder
-    public Role(String id, LocalDateTime updatedAt, LocalDateTime createdAt, Boolean deleted, String name) {
+    public Role(String id, LocalDateTime updatedAt, LocalDateTime createdAt, Boolean deleted, String name, Integer users) {
         super(id, updatedAt, createdAt, deleted);
         this.name = name;
+        this.users = users;
     }
 
     private String name;
+
+    private Integer users = 0;
 
     //TODO: Making test of inheritance with ROLE....
     // Testing is pending

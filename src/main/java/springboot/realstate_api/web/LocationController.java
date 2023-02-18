@@ -35,8 +35,9 @@ public class LocationController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<LocationDto> delete(@PathVariable final String id) {
-        return new ResponseEntity<>(toDto(locationService.delete(id)), HttpStatus.OK);
+    public ResponseEntity<Void> delete(@PathVariable final String id) {
+        locationService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     public Location toModel(LocationDto locationDto) {

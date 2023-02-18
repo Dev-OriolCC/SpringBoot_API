@@ -5,8 +5,10 @@ import org.springframework.stereotype.Repository;
 import springboot.realstate_api.data.entities.RoleEntity;
 import springboot.realstate_api.data.entities.UserEntity;
 
+import java.util.Optional;
+
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String> {
-    UserEntity findByEmail(String email);
+    Optional<UserEntity> findByEmail(String email);
     Integer countUserEntitiesByRole(RoleEntity role); // testr
 }

@@ -14,6 +14,7 @@ import springboot.realstate_api.web.property.FileStorageProperties;
 })
 @SpringBootApplication
 public class RealstateApiApplication {
+
 	public static void main(String[] args) {
 		SpringApplication.run(RealstateApiApplication.class, args);
 	}

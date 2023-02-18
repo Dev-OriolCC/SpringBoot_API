@@ -2,15 +2,14 @@ package springboot.realstate_api.data.gateways;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import springboot.realstate_api.data.entities.LocationEntity;
 import springboot.realstate_api.data.entities.RoleEntity;
 import springboot.realstate_api.data.entities.UserEntity;
+import springboot.realstate_api.data.repositories.LocationRepository;
 import springboot.realstate_api.data.repositories.RoleRepository;
 import springboot.realstate_api.data.repositories.UserRepository;
-import springboot.realstate_api.domain.roles.Role;
 import springboot.realstate_api.domain.users.User;
 import springboot.realstate_api.domain.users.UserGateway;
-import springboot.realstate_api.web.dto.RoleDto;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,6 +24,7 @@ public class DefaultUserGateway implements UserGateway {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final LocationRepository locationRepository;
 
     @Override
     public List<User> getUsers() {
@@ -33,14 +33,8 @@ public class DefaultUserGateway implements UserGateway {
 
     @Override
     public User create(User user) {
-
-        // Refactor this...
         addRoleAutomatic(user);
         user.setId(UUID.randomUUID().toString());
-
-        // Get real entity role
-        user.getRole();
-        user.getRoleId();
         return toModel(userRepository.save(toEntity(user, defaultRoleGateway.toEntity(user.getRole()))));
     }
 
@@ -53,31 +47,37 @@ public class DefaultUserGateway implements UserGateway {
 
     @Override
     public User editUser(User user, String userId) {
-
-        return null;
+        UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Error"));
+        // Update
+        return toModel(updateUserEntity(userEntity, user));
     }
 
     @Override
     public User addRoleToUser(String roleId, String userId) {
-        return null;
+        UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Error"));
+        RoleEntity roleEntity = roleRepository.findById(roleId).orElseThrow(() -> new RuntimeException("Error"));
+        // Add Role
+        userEntity.setRole(roleEntity);
+        //userEntity.getRole().getId();
+        return toModel(userEntity);
     }
 
     @Override
     public User addLocationToUser(String locationId, String userId) {
-        return null;
+        // Add Location
+        LocationEntity locationEntity = locationRepository.findById(locationId).orElseThrow(() -> new RuntimeException("Error"));
+        UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Error"));
+        userEntity.setLocation(locationEntity);
+        return toModel(userEntity);
     }
 
-//    protected Role toModel(RoleEntity role) {
-//        return Role.builder()
-//                .id(role.getId())
-//                .name(role.getName())
-//                .createdAt(role.getCreatedAt())
-//                .updatedAt(role.getUpdatedAt())
-//                .deleted(role.isDeleted())
-//                .build();
-//    }
+    @Override
+    public User findByEmail(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Error"));
+        return toModel(userEntity);
+    }
 
-    protected User addRoleAutomatic(User user) {
+    protected void addRoleAutomatic(User user) {
         //TODO: Need to refactor this shit...
         Optional<RoleEntity> roleEntity;
         if (user.getRoleId() == null) {
@@ -95,7 +95,18 @@ public class DefaultUserGateway implements UserGateway {
             System.out.println("Find role and add it....");
         }
         user.setRole(defaultRoleGateway.toModel(roleEntity.get()));
-        return user;
+        //return user;
+    }
+
+    protected UserEntity updateUserEntity(UserEntity userEntity, User user) {
+        userEntity.setName(user.getName());
+        userEntity.setLastName(user.getLastName());
+        userEntity.setEmail(user.getEmail());
+        userEntity.setContact_email(user.getContact_email());
+        userEntity.setPassword(userEntity.getPassword());
+        userEntity.setMobile(userEntity.getMobile());
+        userEntity.setTwitter(userEntity.getTwitter());
+        return userRepository.save(userEntity);
     }
 
     protected User toModel(UserEntity userEntity) {
