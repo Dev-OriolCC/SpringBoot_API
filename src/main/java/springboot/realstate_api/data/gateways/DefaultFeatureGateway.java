@@ -8,6 +8,7 @@ import springboot.realstate_api.domain.features.Feature;
 import springboot.realstate_api.domain.features.FeatureGateway;
 
 import java.util.List;
+import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 
@@ -24,6 +25,7 @@ public class DefaultFeatureGateway implements FeatureGateway {
 
     @Override
     public Feature create(Feature feature) {
+        feature.setId(UUID.randomUUID().toString());
         return toModel(featureRepository.save(toEntity(feature)));
     }
 

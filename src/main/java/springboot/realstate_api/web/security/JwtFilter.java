@@ -1,6 +1,5 @@
 package springboot.realstate_api.web.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,11 +17,16 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    @Autowired
-    private JWTUtility jwtUtility;
+    //@Autowired
+    private final JWTUtility jwtUtility;
 
-    @Autowired
-    private UserServiceAuth userServiceAuth;
+    //@Autowired
+    private final UserServiceAuth userServiceAuth;
+
+    public JwtFilter(JWTUtility jwtUtility, UserServiceAuth userServiceAuth) {
+        this.jwtUtility = jwtUtility;
+        this.userServiceAuth = userServiceAuth;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {

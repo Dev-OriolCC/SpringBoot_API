@@ -1,6 +1,5 @@
 package springboot.realstate_api.domain.users;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,25 +9,37 @@ import springboot.realstate_api.data.entities.UserEntity;
 import springboot.realstate_api.data.repositories.UserRepository;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 public class UserServiceAuth implements UserDetailsService {
 
-    UserRepository userRepository;
+    private  UserRepository userRepository;
+    private  UserGateway userGateway;
 
-    @Autowired
-    public UserServiceAuth(UserRepository userRepository) {
+    public UserServiceAuth(UserRepository userRepository, UserGateway userGateway) {
         this.userRepository = userRepository;
+        this.userGateway = userGateway;
     }
+
+
+//    @Autowired
+//    public UserServiceAuth(UserRepository userRepository, UserGateway userGateway) {
+//        this.userRepository = userRepository;
+//        this.userGateway = userGateway;
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         // Get user from database
-        Optional<UserEntity> userModel =  userRepository.findByEmail(userName);
-        String userEmail =  userModel.get().getEmail(); //String.valueOf(User.builder().username(userModel.getEmail()));
-        String password = userModel.get().getPassword(); //String.valueOf(User.builder().password(userModel.getPassword()));
+        UserEntity userModel =  userRepository.findByEmail(userName);
+        String userEmail =  userModel.getEmail(); //String.valueOf(User.builder().username(userModel.getEmail()));
+        String password = userModel.getPassword(); //String.valueOf(User.builder().password(userModel.getPassword()));
         //
         return new User(userEmail, password, new ArrayList<>());
     }
+
+    public springboot.realstate_api.domain.users.User findByEmail(String email) {
+        return userGateway.findByEmail(email);
+    }
+
 }

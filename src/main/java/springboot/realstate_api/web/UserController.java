@@ -79,6 +79,7 @@ public class UserController {
                 .name(user.getName())
                 .lastName(user.getLastname())
                 .email(user.getEmail())
+                .password(user.getPassword())
                 .contact_email(user.getContact_email())
                 .twitter(user.getTwitter())
                 .mobile(user.getMobile())
@@ -103,6 +104,12 @@ public class UserController {
                 .deleted(user.isDeleted())
                 // Relationship
                 .role(roleController.toDto(user.getRole()))
+                .build();
+    }
+
+    public UserRequestDto toDtoUser(User user) {
+        return UserRequestDto.builder()
+                .email(user.getEmail())
                 .build();
     }
 

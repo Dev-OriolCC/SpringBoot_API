@@ -1,5 +1,6 @@
 package springboot.realstate_api.web.security;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import springboot.realstate_api.domain.users.UserGateway;
@@ -21,21 +23,22 @@ import springboot.realstate_api.domain.users.UserServiceAuth;
 
 @Configuration
 @EnableWebSecurity
-public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter implements ApplicationContextAware {
+public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter  { //implements ApplicationContextAware
 
     @Autowired
-    private UserServiceAuth userServiceAuth;
+    private  UserServiceAuth userServiceAuth;
     @Autowired
-    private JwtFilter jwtFilter;
+    private  JwtFilter jwtFilter;
+//    @Autowired
+    //private  UserGateway userService;
     @Autowired
-    private UserGateway userService;
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private  UserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        //auth.userDetailsService(userServiceAuth);
-        auth.authenticationProvider(authProvider());
+        auth.userDetailsService(userServiceAuth);
+        //auth.userDetailsService(userServiceAuth).passwordEncoder(passwordEncoder());
+        //auth.authenticationProvider(authProvider());
     }
 
     @Override
@@ -44,6 +47,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter implemen
         return super.authenticationManagerBean();
     }
 
+
     // This is how to disable CSRF Protection
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -51,8 +55,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter implemen
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/authenticate", "/swagger-ui/index.html#", "/users", "/roles", "/types"
-                ,"/**")
+                .antMatchers("/login/authenticate", "/swagger-ui/index.html#", "/users", "/roles", "/types", "/auth/login"
+                ,"/**", "/auth/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -66,6 +70,7 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter implemen
     // Hashing passwords
     @Bean
     public AuthenticationProvider authProvider() {
+        //TODO: HERE_ERROR
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder());
         provider.setUserDetailsService(userDetailsService); //?
@@ -74,8 +79,10 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter implemen
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        //return new BCryptPasswordEncoder();
+        return NoOpPasswordEncoder.getInstance();
     }
+
 
 //    @Override
 //    protected void registerAuthentication(AuthenticationManagerBuilder authManagerBuilder) throws Exception {

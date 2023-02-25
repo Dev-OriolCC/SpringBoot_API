@@ -1,6 +1,9 @@
 package springboot.realstate_api.data.gateways;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import springboot.realstate_api.data.entities.LocationEntity;
 import springboot.realstate_api.data.entities.RoleEntity;
@@ -25,6 +28,7 @@ public class DefaultUserGateway implements UserGateway {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final LocationRepository locationRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> getUsers() {
@@ -35,6 +39,7 @@ public class DefaultUserGateway implements UserGateway {
     public User create(User user) {
         addRoleAutomatic(user);
         user.setId(UUID.randomUUID().toString());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return toModel(userRepository.save(toEntity(user, defaultRoleGateway.toEntity(user.getRole()))));
     }
 
@@ -54,11 +59,14 @@ public class DefaultUserGateway implements UserGateway {
 
     @Override
     public User addRoleToUser(String roleId, String userId) {
+        // Remove previous role and add new.
         UserEntity userEntity = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Error"));
         RoleEntity roleEntity = roleRepository.findById(roleId).orElseThrow(() -> new RuntimeException("Error"));
         // Add Role
         userEntity.setRole(roleEntity);
+        userRepository.save(userEntity);
         //userEntity.getRole().getId();
+        //! GOOD
         return toModel(userEntity);
     }
 
@@ -73,7 +81,7 @@ public class DefaultUserGateway implements UserGateway {
 
     @Override
     public User findByEmail(String email) {
-        UserEntity userEntity = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Error"));
+        UserEntity userEntity = userRepository.findByEmail(email); //.orElseThrow(() -> new RuntimeException("Error"));
         return toModel(userEntity);
     }
 
