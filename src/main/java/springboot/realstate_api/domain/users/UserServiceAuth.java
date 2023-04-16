@@ -1,9 +1,11 @@
 package springboot.realstate_api.domain.users;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import springboot.realstate_api.data.entities.UserEntity;
 import springboot.realstate_api.data.repositories.UserRepository;
@@ -13,20 +15,15 @@ import java.util.ArrayList;
 @Service
 public class UserServiceAuth implements UserDetailsService {
 
-    private  UserRepository userRepository;
-    private  UserGateway userGateway;
+    private UserRepository userRepository;
+    private UserGateway userGateway;
 
+    @Autowired
     public UserServiceAuth(UserRepository userRepository, UserGateway userGateway) {
         this.userRepository = userRepository;
         this.userGateway = userGateway;
     }
 
-
-//    @Autowired
-//    public UserServiceAuth(UserRepository userRepository, UserGateway userGateway) {
-//        this.userRepository = userRepository;
-//        this.userGateway = userGateway;
-//    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {

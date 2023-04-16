@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 //@EntityListeners({AuditingEntityListener.class})
 @AllArgsConstructor
 @NoArgsConstructor
-public  class BaseEntity {
+public class BaseEntity {
     // This is a test....
     @Id
     @Column(name = "id", length = 36, unique = true, nullable = false)

@@ -14,7 +14,6 @@ import springboot.realstate_api.web.dto.PropertyRequestDto;
 import springboot.realstate_api.web.dto.PropertyResponseDto;
 import springboot.realstate_api.domain.properties.PropertyGateway;
 import springboot.realstate_api.web.dto.UserRequestDto;
-import springboot.realstate_api.web.security.JWTUtility;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,7 +26,6 @@ import static java.util.stream.Collectors.toList;
 public class PropertyController {
     private final PropertyGateway propertyService;
     UserService userService;
-    JWTUtility jwtUtility;
     @Autowired
     public PropertyController(PropertyGateway propertyService) {
         this.propertyService = propertyService;
@@ -55,10 +53,9 @@ public class PropertyController {
             @RequestBody final PropertyRequestDto propertyRequestDto,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token) {
 
-        String email = jwtUtility.getUsernameFromToken(token);
-        User user = userService.findUserByEmail(email);
-        propertyRequestDto.setPropertyUserId(user.getId()); // Id assigned from token user.
-        //PropertyResponseDto propertyResponseDto = propertyService.create(propertyRequestDto);
+        //String email = jwtUtility.getUsernameFromToken(token);
+        //User user = userService.findUserByEmail(email);
+        //propertyRequestDto.setPropertyUserId(user.getId()); // Id assigned from token user.
         return new ResponseEntity<>(toDto2(propertyService.create(toModel(propertyRequestDto))), HttpStatus.OK);
     }
     // Edit Property

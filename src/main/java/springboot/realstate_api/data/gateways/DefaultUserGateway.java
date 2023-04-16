@@ -1,7 +1,5 @@
 package springboot.realstate_api.data.gateways;
 
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -20,7 +18,7 @@ import java.util.UUID;
 import static java.util.stream.Collectors.toList;
 
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class DefaultUserGateway implements UserGateway {
 
     private final DefaultRoleGateway defaultRoleGateway; // test
@@ -28,7 +26,13 @@ public class DefaultUserGateway implements UserGateway {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final LocationRepository locationRepository;
-    private final PasswordEncoder passwordEncoder;
+
+    public DefaultUserGateway(DefaultRoleGateway defaultRoleGateway, UserRepository userRepository, RoleRepository roleRepository, LocationRepository locationRepository) {
+        this.defaultRoleGateway = defaultRoleGateway;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.locationRepository = locationRepository;
+    }
 
     @Override
     public List<User> getUsers() {
@@ -39,7 +43,7 @@ public class DefaultUserGateway implements UserGateway {
     public User create(User user) {
         addRoleAutomatic(user);
         user.setId(UUID.randomUUID().toString());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //user.setPassword(passwordEncoder.encode(user.getPassword()));
         return toModel(userRepository.save(toEntity(user, defaultRoleGateway.toEntity(user.getRole()))));
     }
 
