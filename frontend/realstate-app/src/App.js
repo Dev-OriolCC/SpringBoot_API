@@ -6,6 +6,7 @@ import './App.css';
 
 import Navbar from './components/common/Navbar';
 import routes from './config/routes';
+import Home from './pages/Home';
 //import { Routes } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -18,7 +19,7 @@ function App() {
           <Navbar />
           <Routes>
             {routes.map(({ path, element }) => (
-              <Route key={path} path={path} element={React.createElement(element)} />
+              <Route key={path} path={path} element={element} />
             ))}
           </Routes>
         </Router>
