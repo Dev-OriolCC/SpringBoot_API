@@ -7,6 +7,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { HomeComponent } from './pages/home/home.component';
+import { NavigationLinkComponent } from './components/navigation-link/navigation-link.component';
+import { CustomButtonComponent } from './components/custom-button/custom-button.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { HomeComponent } from './pages/home/home.component';
     FooterComponent,
     HeaderComponent,
     SliderComponent,
-    HomeComponent
+    HomeComponent,
+    NavigationLinkComponent,
+    CustomButtonComponent
   ],
   imports: [
     BrowserModule,
