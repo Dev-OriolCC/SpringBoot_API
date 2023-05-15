@@ -1,7 +1,6 @@
 package springboot.realstate_api.data.gateways;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Component;
 import springboot.realstate_api.data.entities.LocationEntity;
 import springboot.realstate_api.data.entities.RoleEntity;

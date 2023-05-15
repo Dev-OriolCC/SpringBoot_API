@@ -11,13 +11,10 @@ import springboot.realstate_api.web.RoleControllerTest;
 @SpringBootTest
 class RealstateApiApplicationTests {
 
-
 	@Test
 	void contextLoads() {
 
 		SpringApplication.run(RoleControllerTest.class);
 	}
-
-
 
 }

@@ -9,6 +9,8 @@ import { SliderComponent } from './components/slider/slider.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NavigationLinkComponent } from './components/navigation-link/navigation-link.component';
 import { CustomButtonComponent } from './components/custom-button/custom-button.component';
+import { CardComponent } from './components/card/card.component';
+import { PropertyComponent } from './components/property/property.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { CustomButtonComponent } from './components/custom-button/custom-button.
     SliderComponent,
     HomeComponent,
     NavigationLinkComponent,
-    CustomButtonComponent
+    CustomButtonComponent,
+    CardComponent,
+    PropertyComponent
   ],
   imports: [
     BrowserModule,

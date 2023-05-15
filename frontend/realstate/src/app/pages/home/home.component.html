@@ -6,19 +6,17 @@
             <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
         </div>
         <div class="row g-4">
-            <!-- Component -->
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                <a class="cat-item d-block bg-light text-center rounded p-3" href="">
-                    <div class="rounded p-4">
-                        <div class="icon mb-3">
-                            <img class="img-fluid" src="img/icon-apartment.png" alt="Icon">
-                        </div>
-                        <h6>Apartment</h6>
-                        <span>123 Properties</span>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+            
+            <!-- Custom-Category-Card -->
+            <app-card
+                [name]="'Apartment'"
+                [number]="'123'"
+                [image]="'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Home-icon.svg/2048px-Home-icon.svg.png'"
+            />
+            <!-- END-Custom-Card -->
+            
+            <!-- TODO ADD ALL OF THIS INTO DB -->
+            <!-- <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                 <a class="cat-item d-block bg-light text-center rounded p-3" href="">
                     <div class="rounded p-4">
                         <div class="icon mb-3">
@@ -94,7 +92,7 @@
                         <span>123 Properties</span>
                     </div>
                 </a>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -129,6 +127,21 @@
         <div class="tab-content">
             <div id="tab-1" class="tab-pane fade show p-0 active">
                 <div class="row g-4">
+                    <!-- Custom-Property-Card -->
+                    <app-property 
+                        [listingType]="'Rent'" 
+                        [type]="'Apartment'" 
+                        [price]="100300"
+                        [title]="'Penthouse in WTC'"
+                        [location]="'123 Street, New York, USA'"
+                        [beds]="4"
+                        [baths]="2"
+                        [image]="'https://www.paranych.com/uploads/benefits-penthouse-living-main-image.png'"
+                    />
+                    <!-- END  Custom-Property-Card  -->
+
+                    <!--    Example    -->
+                    <!-- 
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="property-item rounded overflow-hidden">
                             <div class="position-relative overflow-hidden">
@@ -185,7 +198,9 @@
                                 <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
                             </div>
                         </div>
-                    </div>
+                    </div> 
+                    -->
+
                 </div>
             </div>
         </div>

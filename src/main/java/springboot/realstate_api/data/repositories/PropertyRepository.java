@@ -8,4 +8,5 @@ import springboot.realstate_api.data.entities.PropertyEntity;
 @Repository
 public interface PropertyRepository extends JpaRepository<PropertyEntity, String> {
     PropertyEntity findByPhotos(PhotoEntity photo);
+    Integer countByTypeId(String id);
 }

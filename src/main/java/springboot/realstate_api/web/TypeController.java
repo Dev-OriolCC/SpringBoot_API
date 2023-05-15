@@ -60,6 +60,7 @@ public class TypeController {
                 .createdAt(type.getCreatedAt())
                 .updatedAt(type.getUpdatedAt())
                 .deleted(type.isDeleted())
+                .total(type.getTotal()) // TEST
                 .build();
     }
 }

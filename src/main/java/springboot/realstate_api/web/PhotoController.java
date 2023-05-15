@@ -1,30 +1,14 @@
 package springboot.realstate_api.web;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import springboot.realstate_api.domain.photos.Photo;
 import springboot.realstate_api.domain.photos.PhotoService;
 import springboot.realstate_api.web.dto.PhotoDto;
-import springboot.realstate_api.web.dto.UploadFileResponse;
-import springboot.realstate_api.domain.files.FileStorageService;
-import springboot.realstate_api.domain.photos.PhotoGateway;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.servlet.http.HttpServletRequest;
 
 import static java.util.stream.Collectors.toList;
 
