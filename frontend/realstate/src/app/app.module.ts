@@ -11,6 +11,8 @@ import { NavigationLinkComponent } from './components/navigation-link/navigation
 import { CustomButtonComponent } from './components/custom-button/custom-button.component';
 import { CardComponent } from './components/card/card.component';
 import { PropertyComponent } from './components/property/property.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { PropertyComponent } from './components/property/property.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,6 +17,7 @@ import static java.util.stream.Collectors.toList;
 @RestController
 @RequestMapping("/types")
 @AllArgsConstructor
+@CrossOrigin
 public class TypeController {
 
     private final TypeService typeService;
